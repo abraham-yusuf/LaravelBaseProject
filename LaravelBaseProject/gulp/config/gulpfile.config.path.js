@@ -19,7 +19,7 @@ vendors_path = {
     }
 };
 
-const assets_base_path = './resources/assets';
+const assets_base_path = './resources';
 const public_path = './public';
 
 const assets_path = {
@@ -43,7 +43,7 @@ module.exports = {
                 vendors_path.bootstrap.css,
                 vendors_path.font_awesome.css
             ],
-            app: assets_path.css + "/main.css"
+            app: assets_path.css + "/app.css"
         },
         fonts: {
             vendors: [

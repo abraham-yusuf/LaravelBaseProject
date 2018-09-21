@@ -1,72 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-namespace.add('', function () {
-    var core = {};
-
-    core.loadLazyScripts = function() {
-        var webConfig = getConfig();
-        if (webConfig) {
-            lazyJS(webConfig.lazyJs);
-        }
-    };
-
-    core.setCSRFTokenToHeaders = function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    };
-
-    function getConfig() {
-        var wconfig = $("#wconfig");
-        if (wconfig) {
-            return {
-                lazyJs: wconfig.data("lj")
-            }
-        }
-        else {
-            return null;
-        }
-    }
-
-    function lazyJS(url) {
-        if (url) {
-            var script = document.createElement('script');
-            script.src = url;
-            document.getElementsByTagName('head')[0].appendChild(script);
-        }
-    }
-
-    return core;
-
-}());
-
-},{}],2:[function(require,module,exports){
-require('./modules');
-
-$(function () {
-    $W.setCSRFTokenToHeaders();
-    $W.loadLazyScripts();
-});
-
-// window.Vue = require('vue');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-// const app = new Vue({
-//     el: '#app'
-// });
-},{"./modules":3}],3:[function(require,module,exports){
-require('./namespace');
-require('./core');
-},{"./core":1,"./namespace":4}],4:[function(require,module,exports){
-(function (global){
 ﻿var $W = $W || {};
 
 var namespace = function () {
@@ -163,6 +94,3 @@ else {
     window.$W = $W;
     window.namespace = namespace;
 }
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[2])
-//# sourceMappingURL=app.js.map
