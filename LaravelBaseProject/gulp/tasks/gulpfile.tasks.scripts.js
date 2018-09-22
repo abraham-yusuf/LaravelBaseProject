@@ -36,6 +36,7 @@ function authJs() {
 function vendorsJs() {
     return new Promise(function (resolve, reject) {
         gulp.src(config.paths.src.js.vendors)
+            .pipe(browserify())
             .pipe(rename(config.names.js.vendors))
             .pipe(gulp.dest(config.paths.dest.js.vendors))
             .on('end', resolve);

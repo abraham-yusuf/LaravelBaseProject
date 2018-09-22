@@ -1,18 +1,9 @@
 const lib_path = './node_modules';
 
 const vendors_base_path = {
-    bootstrap: lib_path + "/bootstrap/dist",
-    jquery: lib_path + "/jquery/dist",
     font_awesome: lib_path + "/@fortawesome/fontawesome-free"
 };
 vendors_path = {
-    bootstrap: {
-        js: vendors_base_path.bootstrap + "/js/bootstrap.min.js",
-        css: vendors_base_path.bootstrap + "/css/bootstrap.min.css"
-    },
-    jquery: {
-        js: vendors_base_path.jquery + "/jquery.min.js"
-    },
     font_awesome: {
         css: vendors_base_path.font_awesome + "/css/all.css",
         fonts: vendors_base_path.font_awesome + "/webfonts/**/*",
@@ -31,18 +22,12 @@ const assets_path = {
 module.exports = {
     src: {
         js: {
-            vendors: [
-                vendors_path.bootstrap.js,
-                vendors_path.jquery.js
-            ],
+            vendors: assets_path.js + "/vendors.js",
             app: assets_path.js + "/app.js",
             auth: assets_path.js + "/auth.js"
         },
         css: {
-            vendors: [
-                vendors_path.bootstrap.css,
-                vendors_path.font_awesome.css
-            ],
+            vendors: assets_path.css + "/vendors.css",
             app: assets_path.css + "/app.css"
         },
         fonts: {

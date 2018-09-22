@@ -10,7 +10,7 @@ function appCss() {
     return new Promise(function (resolve, reject) {
         gulp.src(config.paths.src.css.app)
             .pipe(sourcemaps.init())
-            .pipe(postcss(config.plugin.css.postcss))
+            .pipe(postcss(config.plugin.css.postcss.app))
             .pipe(cssnano(config.plugin.css.cssnano))
             .pipe(rename(config.names.css.app))
             .pipe(sourcemaps.write('.'))
@@ -22,6 +22,7 @@ function appCss() {
 function vendorCss() {
     return new Promise(function (resolve, reject) {
         return gulp.src(config.paths.src.css.vendors)
+            .pipe(postcss(config.plugin.css.postcss.vendors))
             .pipe(rename(config.names.css.vendors))
             .pipe(gulp.dest(config.paths.dest.css.vendors))
             .on('end', resolve);
