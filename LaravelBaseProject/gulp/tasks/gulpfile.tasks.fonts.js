@@ -1,11 +1,13 @@
 const gulp = require('gulp');
 const config = require('../config/gulpfile.config');
+const flatten = require('gulp-flatten');
 
-function vendorFonts() {
-    return gulp.src(config.paths.src.fonts.vendors)
-        .pipe(gulp.dest(config.paths.dest.fonts.vendors));
+function appFonts() {
+    return gulp.src(config.paths.src.fonts.app)
+        .pipe(flatten())
+        .pipe(gulp.dest(config.paths.dest.fonts.app));
 }
 
 module.exports = {
-    vendorFonts: vendorFonts
+    appFonts: appFonts
 };

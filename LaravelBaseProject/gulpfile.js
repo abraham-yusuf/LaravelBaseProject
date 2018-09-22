@@ -32,7 +32,7 @@ gulp.task('css', function () {
 });
 
 gulp.task('fonts', function () {
-    return fonts.vendorFonts();
+    return fonts.appFonts();
 });
 
 gulp.task('images', function () {

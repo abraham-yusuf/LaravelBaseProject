@@ -1,21 +1,10 @@
-const lib_path = './node_modules';
-
-const vendors_base_path = {
-    font_awesome: lib_path + "/@fortawesome/fontawesome-free"
-};
-vendors_path = {
-    font_awesome: {
-        css: vendors_base_path.font_awesome + "/css/all.css",
-        fonts: vendors_base_path.font_awesome + "/webfonts/**/*",
-    }
-};
-
 const assets_base_path = './resources';
 const public_path = './public';
 
 const assets_path = {
     js: assets_base_path + "/js",
     css: assets_base_path + "/css",
+    fonts: assets_base_path + "/fonts",
     images: assets_base_path + "img"
 };
 
@@ -31,9 +20,7 @@ module.exports = {
             app: assets_path.css + "/app.css"
         },
         fonts: {
-            vendors: [
-                vendors_path.font_awesome.fonts
-            ]
+            app: [assets_path.fonts + "/**/*.{ttf,woff,woff2,eof,eot,svg}"]
         },
         images: {
             app: [
@@ -54,8 +41,7 @@ module.exports = {
             app: public_path + "/css/"
         },
         fonts: {
-            vendors: public_path + "/webfonts/",
-            app: public_path + "/webfonts/",
+            app: public_path + "/fonts/",
         },
         images: {
             vendors: public_path + "/img/",
