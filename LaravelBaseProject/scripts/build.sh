@@ -2,7 +2,7 @@
 
 #questo script va lanciato cosí:
 #./build.sh <releaseType> <envType> <publicFolderName>
-#releaseType: mayor o minor (cambia automaticamente il num di versione di 1) o prod (non fa nulla, solo crea cartella)
+#releaseType: mayor o minor (cambia automaticamente il num di versione di 1e fa commit e zip) o onlybuild (non fa nulla, solo crea cartella)
 #envType: development o production (per es in prod app.js sará minificato)
 #publicFolderName: public o public_html o quello che vuoi
 
@@ -50,13 +50,23 @@ php artisan config:cache
 printf "\n${GREEN} - Building a new app version:${NC}\n"
 
 gulp --env=${envType}
-gulp build:${releaseType} --pub=${publicFolderName}
+
+gulpReleaseType=${releaseType};
+
+if [ "$releaseType" == "onlybuild" ]; then
+      gulpReleaseType="prod"
+    fi
+
+gulp build:${gulpReleaseType} --pub=${publicFolderName}
 
 appName=($(jq -r '.name' composer.json))
 appVersion=($(jq -r '.version' composer.json))
 
-cd scripts/
-./commitAndZip.sh ${appName} ${appVersion}
+if [ "$releaseType" != "onlybuild" ]; then
+    cd scripts/
+    ./commitAndZip.sh ${appName} ${appVersion}
+fi
+
 
 printf "${NC}\n"
 
