@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 
 #questo script va lanciato cosí:
 #./build.sh <releaseType> <envType> <publicFolderName>
@@ -19,13 +19,13 @@ printf "${BLUE}*****************************************************************
 printf "********************* PROJECT VERSION BUILDING SCRIPT ************************\n"
 printf "****************************************************************************\n"
 
-releaseType=$1;
-envType=$2;
-publicFolderName=$3;
+releaseType=$1
+envType=$2
+publicFolderName=$3
 
-printf "\n${YELLOW} Version release type:${NC}\n"
-
-printf "${releaseType}\n";
+printf "\n${YELLOW} Version release type:${NC}${releaseType}\n"
+printf "\n${YELLOW} Env type:${NC}${envType}\n"
+printf "\n${YELLOW} Public folder name:${NC}${publicFolderName}\n"
 
 printf "\n${GREEN} - Going to the project folder:${NC}\n"
 
@@ -49,13 +49,14 @@ php artisan config:cache
 
 printf "\n${GREEN} - Building a new app version:${NC}\n"
 
-gulp build:${releaseType} --env=${envType} --pub=${publicFolderName}
+gulp --env=${envType}
+gulp build:${releaseType} --pub=${publicFolderName}
 
 appName=($(jq -r '.name' composer.json))
 appVersion=($(jq -r '.version' composer.json))
 
 cd scripts/
-#./commitAndZip.sh ${appName} ${appVersion}
+./commitAndZip.sh ${appName} ${appVersion}
 
 printf "${NC}\n"
 
