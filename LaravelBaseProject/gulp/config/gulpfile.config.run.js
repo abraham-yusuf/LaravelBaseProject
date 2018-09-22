@@ -5,17 +5,11 @@ const run = {
     development: {
         js: {
             uglify: false
-        },
-        css: {
-            cssnano: false
         }
     },
     production: {
         js: {
             uglify: true
-        },
-        css: {
-            cssnano: true
         }
     }
 };
