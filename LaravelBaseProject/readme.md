@@ -1,65 +1,72 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+#Laravel Base Project
+* Repository: git@bitbucket.org:cronycles/LaravelBaseProject.git
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Scaricare per la prima volta il progetto in locale
+* scaricare il progetto git
+```
+$ git clone git@bitbucket.org:cronycles/LaravelBaseProject.git
+```
+* portarsi con il terminale nella cartella del progetto web:
+```
+$ cd LaravelBaseProject/LaravelBaseProject
+```
+* Eseguire i seguenti comandi per installare i pacchetti necessari
+```
+$ composer install
+$ npm install 
+$ php artisan vendor:publish
+```
 
-## About Laravel
+* associare al plugin PostCSS i css del progetto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+* aggiustare in _.env_ i parametri del db
+* lanciare poi
+```
+$ php artisan migrate
+$ php artisan db:seed
+```
+* lanciare il _gulp_
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+* dare al play!
 
-## Learning Laravel
+## Deploy a Production
+prima di lanciarlo assicurarsi di:
+>* avere installato nel proprio pc jq [Use Homebrew to install jq con **brew install jq**]
+>* avere il branch develop e master in locale
+>* avere il branch develop traked con l'origin [ci si mette in develop e si lancia git branch --set-upstream-to=origin/develop develop ]
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+* Andare nella cartella _/scripts_ col terminale.
+* Lanciare lo script _build.sh_. con una delle seguenti configurazioni:
+```
+$ ./build.sh onlybuild production public_html
+```
+>* **onlybuild**: significa che voglio solo fare la cartella build, senza cambi di versione, ne zip
+>* **production**: significa che voglio creare minificati etc
+>* **public_html**: è il nome che voglio dare alla cartella public in produzione
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+Lo script si puó lanciare anche col **primo** parametro differente: 
+>* **minor:** cambia automaticamente di 1 il numero della versione **minor**, hace una release, la commita e crea il zip file
+>* **mayor:** cambia automaticamente di 1 il numero della versione **mayor**, hace una release, la commita e crea il zip file
 
-## Laravel Sponsors
+> Il tutto verrá fatto in modo automatico. Il numero di versione si cambierá solo e verrá fatto il commit di tutto.
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+* Si eseguiranno una serie di comandi e in seguito si aprirá la cartella _/build.
+* Nel frattempo, se definito nei parametri, si creerá uno zip con la versione da applicare si deployerá automaticamente in produzione.
+* Basterá solo scompattare lo zip direttamente nella cartella e, se tutto fuziona, metterlo nella cartella di backups.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
+#### N.B. Occhio quando si fanno le operazioni di unzip a non cancellare mail dal server le cartelle che:
+* iniziano con il punto (.blablabla)
+* backups
+* etc
+* logs 
+* mail
+* public_ftp
+* public_html
+* ssl
+* tmp
+* access-logs
+* www
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### N.B. Occhio ancora e ricordarsi di creare il percorso public/uploads/images. 
+Bisogna farlo a mano con filezilla altrimenti non si caricheranno le immagini
