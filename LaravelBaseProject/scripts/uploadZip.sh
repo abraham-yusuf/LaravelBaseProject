@@ -24,9 +24,7 @@ printf "${BLUE}***************************************************************\n
 printf "********************** PROJECT UPLOADING ZIP *************************\n"
 printf "**********************************************************************\n"
 
-HOST='ftp.hirikoestudio.com'
-USER='hirikoes'
-PASSWD='3FG7a59gqn'
+source ftp.conf
 
 BUILD_FOLDER='../build'
 BACKUPS_FOLDER_NAME="backups"
@@ -47,7 +45,7 @@ find "$BUILD_FOLDER" -maxdepth 1 -type f -iname '*.zip' | while read FILE; do
 	put $FILE $fileBasename
 	quit
 END_SCRIPT
-    
+
 done
 
 #unzip -lqq "$FILE" '*_xx.xml' >/dev/null && echo mv -v "$FILE" "$ANOTHER"/

@@ -56,7 +56,12 @@ Lo script si puó lanciare anche col **primo** parametro differente:
 
 
 ## Deploy a Production
-*Lo zip si puó caricare a mano o automaticamente via ftp con lo script **upload.sh**
+*Lo zip si puó caricare a mano o automaticamente via ftp con lo script **uploadZip.sh**
+
+*Semplicemente lanciando lo script senza parametri lo subirá al ftp che avete indicato nella configurazione che si trova:
+```
+./scripts/ftp.conf
+```
 
 * Basterá solo caricare scompattare lo zip direttamente nella cartella e, se tutto fuziona, metterlo nella cartella di backups.
 
@@ -76,9 +81,6 @@ Lo script si puó lanciare anche col **primo** parametro differente:
 #### N.B. Occhio ancora e ricordarsi di creare il percorso public/uploads/images. 
 Bisogna farlo a mano con filezilla altrimenti non si caricheranno le immagini
 
-##uploadZip.sh
-```
-$ ./uploadZip.sh
-```
-caricherá a produzione lo script se presente nella cartella _/build_.
-Occhio peró perché dovete modificare prima i parametri dentro lo script 
+##Build e Deploy insieme
+Se si vuol far tutto in un colpo basterá lanciare lo script **buildAndUploadZip.sh** con gli stessi parametri
+usati per **build.sh** e lui fará la build e metterá automaticamente tutto in ftp
