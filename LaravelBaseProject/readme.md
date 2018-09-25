@@ -30,7 +30,7 @@ $ php artisan db:seed
 
 * dare al play!
 
-## Deploy a Production
+## Build per Production
 prima di lanciarlo assicurarsi di:
 >* avere installato nel proprio pc jq [Use Homebrew to install jq con **brew install jq**]
 >* avere il branch develop e master in locale
@@ -52,8 +52,13 @@ Lo script si puó lanciare anche col **primo** parametro differente:
 > Il tutto verrá fatto in modo automatico. Il numero di versione si cambierá solo e verrá fatto il commit di tutto.
 
 * Si eseguiranno una serie di comandi e in seguito si aprirá la cartella _/build.
-* Nel frattempo, se definito nei parametri, si creerá uno zip con la versione da applicare si deployerá automaticamente in produzione.
-* Basterá solo scompattare lo zip direttamente nella cartella e, se tutto fuziona, metterlo nella cartella di backups.
+* Nel frattempo, se definito nei parametri, si creerá uno zip con la versione da applicare.
+
+
+## Deploy a Production
+*Lo zip si puó caricare a mano o automaticamente via ftp con lo script **upload.sh**
+
+* Basterá solo caricare scompattare lo zip direttamente nella cartella e, se tutto fuziona, metterlo nella cartella di backups.
 
 #### N.B. Occhio quando si fanno le operazioni di unzip a non cancellare mail dal server le cartelle che:
 * iniziano con il punto (.blablabla)
@@ -70,3 +75,10 @@ Lo script si puó lanciare anche col **primo** parametro differente:
 
 #### N.B. Occhio ancora e ricordarsi di creare il percorso public/uploads/images. 
 Bisogna farlo a mano con filezilla altrimenti non si caricheranno le immagini
+
+##uploadZip.sh
+```
+$ ./uploadZip.sh
+```
+caricherá a produzione lo script se presente nella cartella _/build_.
+Occhio peró perché dovete modificare prima i parametri dentro lo script 

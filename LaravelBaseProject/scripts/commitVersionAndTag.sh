@@ -14,10 +14,6 @@ clear
 appName=$1;
 appVersion=$2;
 
-zipFileName="${appName}_v${appVersion}.zip"
-
-zip -r ./build/$zipFileName ./build
-
 printf "\n${GREEN} - Commit the new app version ${appVersion} change:${NC}\n"
 
 git commit -am "changing release version to: v${appVersion}"
@@ -43,13 +39,6 @@ git checkout develop
 git merge master
 
 git push
-
-printf "\n${GREEN} - Opening 'build' directory:${NC}\n"
-
-open ./build
-
-cd scripts/
-./uploadZip.sh
 
 printf "${NC}\n"
 

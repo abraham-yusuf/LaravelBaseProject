@@ -15,9 +15,9 @@ NC='\033[0m' # No Color
 
 clear
 
-printf "${BLUE}****************************************************************************\n"
-printf "********************* PROJECT VERSION BUILDING SCRIPT ************************\n"
-printf "****************************************************************************\n"
+printf "${BLUE}***************************************************************\n"
+printf "********************* PROJECT BUILDING SCRIPT ************************\n"
+printf "**********************************************************************\n"
 
 releaseType=$1
 envType=$2
@@ -63,9 +63,13 @@ appName=($(jq -r '.name' composer.json))
 appVersion=($(jq -r '.version' composer.json))
 
 if [ "$releaseType" != "onlybuild" ]; then
-    cd scripts/
-    ./commitAndZip.sh ${appName} ${appVersion}
+    scripts/createZip.sh ${appName} ${appVersion}
+    scripts/commitVersionAndTag.sh ${appName} ${appVersion}
 fi
+
+printf "\n${GREEN} - Opening 'build' directory:${NC}\n"
+
+open ./build
 
 
 printf "${NC}\n"
