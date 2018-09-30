@@ -6,6 +6,7 @@ const names = {
         js: {
             vendors: "vendors.min.js",
             app: "app.js",
+            lazy: "lazy.js",
             auth: "auth.js"
         },
         css: {
@@ -18,6 +19,7 @@ const names = {
         js: {
             vendors: "vendors.min.js",
             app: "app.min.js",
+            lazy: "lazy.min.js",
             auth: "auth.js"
         },
         css: {

@@ -20,6 +20,19 @@ function appJs() {
     });
 }
 
+function lazyJs() {
+    return new Promise(function (resolve, reject) {
+        gulp.src(config.paths.src.js.lazy)
+            .pipe(sourcemaps.init())
+            .pipe(browserify())
+            .pipe(gulpif(config.run.js.uglify, uglify(config.plugin.js.uglify)))
+            .pipe(rename(config.names.js.lazy))
+            .pipe(sourcemaps.write('.'))
+            .pipe(gulp.dest(config.paths.dest.js.lazy))
+            .on('end', resolve);
+    });
+}
+
 function authJs() {
     return new Promise(function (resolve, reject) {
         gulp.src(config.paths.src.js.auth)
@@ -49,6 +62,7 @@ function hashJs() {
 
 module.exports = {
     appJs: appJs,
+    lazyJs: lazyJs,
     authJs: authJs,
     vendorsJs: vendorsJs,
     hashJs: hashJs

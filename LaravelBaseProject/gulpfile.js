@@ -20,6 +20,7 @@ gulp.task('clean', function () {
 
 gulp.task('js', function () {
     return js.appJs()
+        .then(js.lazyJs)
         .then(js.authJs)
         .then(js.vendorsJs)
         .then(js.hashJs);

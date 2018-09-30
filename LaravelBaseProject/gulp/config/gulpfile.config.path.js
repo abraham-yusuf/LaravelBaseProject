@@ -13,6 +13,7 @@ module.exports = {
         js: {
             vendors: assets_path.js + "/vendors.js",
             app: assets_path.js + "/app.js",
+            lazy: assets_path.js + "/lazy.js",
             auth: assets_path.js + "/auth.js"
         },
         css: {
@@ -33,6 +34,7 @@ module.exports = {
             root: public_path + "/js",
             vendors: public_path + "/js/",
             app: public_path + "/js/",
+            lazy: public_path + "/js/",
             auth: public_path + "/js/"
         },
         css: {
