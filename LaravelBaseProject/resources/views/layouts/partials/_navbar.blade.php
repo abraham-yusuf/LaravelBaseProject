@@ -6,7 +6,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="{{ url('/home') }}">Auth Dashboard</a>
+                    <a href="{{ route('auth') }}">Auth Dashboard</a>
                 </li>
                 <li>
                     <a href="{{ route('logout') }}"

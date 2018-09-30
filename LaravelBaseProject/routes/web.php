@@ -15,8 +15,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Login Routes...
+Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
+Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Forgot Password Routes...
+Route::post('password/email', ['as' => 'password.email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
+Route::get('password/reset', ['as' => 'password.request', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
+Route::post('password/reset', ['as' => 'password.update', 'uses' => 'Auth\ResetPasswordController@reset']);
+Route::get('password/reset/{token}', ['as' => 'password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
+
+//Registration Routes...
+Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
+Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
+
 
 Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/auth', ['as' => 'auth', 'uses' => 'AuthController@index']);
+});
