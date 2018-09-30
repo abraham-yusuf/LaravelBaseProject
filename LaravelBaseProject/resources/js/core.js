@@ -1,14 +1,17 @@
 namespace.add('', function () {
-    var core = {};
+    let core = {};
 
-    core.loadLazyScripts = function() {
-        var webConfig = getConfig();
-        if (webConfig) {
-            lazyJS(webConfig.lazyJs);
+    //Selectors
+    const clientServerSelector = "#cl-srv";
+
+    core.loadLazyScripts = function () {
+        let clSrvConfig = getClientServerConfig();
+        if (clSrvConfig) {
+            lazyJS(clSrvConfig.lazyJs);
         }
     };
 
-    core.setCSRFTokenToHeaders = function() {
+    core.setCSRFTokenToHeaders = function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -16,11 +19,11 @@ namespace.add('', function () {
         });
     };
 
-    function getConfig() {
-        var wconfig = $("#wconfig");
-        if (wconfig) {
+    function getClientServerConfig() {
+        let clSrvConfig = $(clientServerSelector);
+        if (clSrvConfig) {
             return {
-                lazyJs: wconfig.data("lj")
+                lazyJs: clSrvConfig.data("lj")
             }
         }
         else {
@@ -30,7 +33,7 @@ namespace.add('', function () {
 
     function lazyJS(url) {
         if (url) {
-            var script = document.createElement('script');
+            let script = document.createElement('script');
             script.src = url;
             document.getElementsByTagName('head')[0].appendChild(script);
         }

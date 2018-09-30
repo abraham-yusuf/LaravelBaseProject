@@ -9,5 +9,5 @@
 
     </title>
     @include('layouts.partials.head._styles')
-    @include('layouts.partials.head._oldBrowsers')
+    @include('layouts.partials.head._old-browsers')
 </head>
