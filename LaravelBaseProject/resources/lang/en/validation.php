@@ -128,6 +128,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+//        'images.*' => [
+//            'max' => 'l\'the image size cannot be higer than :max KB',
+//        ],
     ],
 
     /*
@@ -141,6 +144,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+//        'project_name'=> 'project name',
+    ],
 
 ];

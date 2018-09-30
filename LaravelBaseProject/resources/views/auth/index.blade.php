@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@include('partials._page-title', ['pageTitle' => __('pages.auth')])
+@extends('layouts.app', ['title' => __('pages.auth')])
 
 @section('content')
     <div class="title m-b-md">
