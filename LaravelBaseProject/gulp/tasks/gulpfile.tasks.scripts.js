@@ -1,4 +1,5 @@
-const gulp = require('gulp');
+const {src, dest, watch} = require('gulp');
+
 const uglify = require('gulp-uglify');
 const gulpif = require('gulp-if');
 const sourcemaps = require('gulp-sourcemaps');
@@ -8,56 +9,49 @@ const config = require('../config/gulpfile.config');
 const hashManager = require('./gulpfile.tasks.hash');
 
 function appJs() {
-    return new Promise(function (resolve, reject) {
-        gulp.src(config.paths.src.js.app)
-            .pipe(sourcemaps.init())
-            .pipe(browserify())
-            .pipe(gulpif(config.run.js.uglify, uglify(config.plugin.js.uglify)))
-            .pipe(rename(config.names.js.app))
-            .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest(config.paths.dest.js.app))
-            .on('end', resolve);
-    });
+    return src(config.paths.src.js.app)
+        .pipe(sourcemaps.init())
+        .pipe(browserify())
+        .pipe(gulpif(config.run.js.uglify, uglify(config.plugin.js.uglify)))
+        .pipe(rename(config.names.js.app))
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest(config.paths.dest.js.app));
 }
 
+
 function lazyJs() {
-    return new Promise(function (resolve, reject) {
-        gulp.src(config.paths.src.js.lazy)
-            .pipe(sourcemaps.init())
-            .pipe(browserify())
-            .pipe(gulpif(config.run.js.uglify, uglify(config.plugin.js.uglify)))
-            .pipe(rename(config.names.js.lazy))
-            .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest(config.paths.dest.js.lazy))
-            .on('end', resolve);
-    });
+    return src(config.paths.src.js.lazy)
+        .pipe(sourcemaps.init())
+        .pipe(browserify())
+        .pipe(gulpif(config.run.js.uglify, uglify(config.plugin.js.uglify)))
+        .pipe(rename(config.names.js.lazy))
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest(config.paths.dest.js.lazy));
 }
 
 function authJs() {
-    return new Promise(function (resolve, reject) {
-        gulp.src(config.paths.src.js.auth)
-            .pipe(sourcemaps.init())
-            .pipe(browserify())
-            .pipe(gulpif(config.run.js.uglify, uglify(config.plugin.js.uglify)))
-            .pipe(rename(config.names.js.auth))
-            .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest(config.paths.dest.js.auth))
-            .on('end', resolve);
-    });
+    return src(config.paths.src.js.auth)
+        .pipe(sourcemaps.init())
+        .pipe(browserify())
+        .pipe(gulpif(config.run.js.uglify, uglify(config.plugin.js.uglify)))
+        .pipe(rename(config.names.js.auth))
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest(config.paths.dest.js.auth));
 }
 
 function vendorsJs() {
-    return new Promise(function (resolve, reject) {
-        gulp.src(config.paths.src.js.vendors)
-            .pipe(browserify())
-            .pipe(rename(config.names.js.vendors))
-            .pipe(gulp.dest(config.paths.dest.js.vendors))
-            .on('end', resolve);
-    });
+    return src(config.paths.src.js.vendors)
+        .pipe(browserify())
+        .pipe(rename(config.names.js.vendors))
+        .pipe(dest(config.paths.dest.js.vendors));
 }
 
 function hashJs() {
     return hashManager.generateFilesHash("js", config.paths.dest.js.root);
+}
+
+function watchJs(taskToRun) {
+    watch(config.paths.src.js.all, taskToRun);
 }
 
 module.exports = {
@@ -65,5 +59,6 @@ module.exports = {
     lazyJs: lazyJs,
     authJs: authJs,
     vendorsJs: vendorsJs,
-    hashJs: hashJs
+    hashJs: hashJs,
+    watchJs: watchJs
 };

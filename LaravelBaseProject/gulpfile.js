@@ -1,57 +1,42 @@
 //Per lanciare con diversi environments:
 // $ gulp <taskname> --env=production --pub=public_html
 
-const gulp = require('gulp');
+const {series, parallel} = require('gulp');
 
+//Imports
 const taskPath = './gulp/tasks';
-const clean = require(taskPath + '/gulpfile.tasks.clean');
-const js = require(taskPath + '/gulpfile.tasks.scripts');
-const css = require(taskPath + '/gulpfile.tasks.styles');
-const fonts = require(taskPath + '/gulpfile.tasks.fonts');
-const images = require(taskPath + '/gulpfile.tasks.images');
-const build = require(taskPath + '/gulpfile.tasks.build');
+const cleanTasks = require(taskPath + '/gulpfile.tasks.clean');
+const jsTasks = require(taskPath + '/gulpfile.tasks.scripts');
+const cssTasks = require(taskPath + '/gulpfile.tasks.styles');
+const fontsTasks = require(taskPath + '/gulpfile.tasks.fonts');
+const imagesTasks = require(taskPath + '/gulpfile.tasks.images');
+const buildTasks = require(taskPath + '/gulpfile.tasks.build');
 
-gulp.task('clean', function () {
-    clean.cleanJs();
-    clean.cleanCss();
-    clean.cleanImages();
-    return clean.cleanFonts();
-});
+//Tasks
+const js = series(parallel(jsTasks.appJs, jsTasks.lazyJs, jsTasks.authJs, jsTasks.vendorsJs), jsTasks.hashJs);
+const css = series(parallel(cssTasks.appCss, cssTasks.vendorCss), cssTasks.hashCss);
+const fonts = fontsTasks.appFonts;
+const images = imagesTasks.appImages;
 
-gulp.task('js', function () {
-    return js.appJs()
-        .then(js.lazyJs)
-        .then(js.authJs)
-        .then(js.vendorsJs)
-        .then(js.hashJs);
-});
+const buildProd = buildTasks.buildProd;
+const buildMayor = series(buildTasks.changeMayorVersion, buildProd);
+const buildMinor = series(buildTasks.changeMinorVersion, buildProd);
 
-gulp.task('css', function () {
-    return css.appCss()
-        .then(css.vendorCss)
-        .then(css.hashCss);
-});
+const watchJs = () => jsTasks.watchJs(js);
+const watchCss = () => jsTasks.watchCss(css);
 
-gulp.task('fonts', function () {
-    return fonts.appFonts();
-});
+const clean = parallel(cleanTasks.cleanJs, cleanTasks.cleanCss, cleanTasks.cleanImages, cleanTasks.cleanFonts);
+const def = series(clean, parallel(js, css, fonts, images));
 
-gulp.task('images', function () {
-    return images.appImages();
-});
-
-gulp.task('default', ['js', 'css', 'fonts', 'images']);
-
-gulp.task('build:mayor', function () {
-    build.changeMayorVersion();
-    build.buildProd();
-});
-
-gulp.task('build:minor', function () {
-    build.changeMinorVersion();
-    build.buildProd();
-});
-
-gulp.task('build:prod', function () {
-    return build.buildProd();
-});
+//Exports
+exports.clean = clean;
+exports.js = js;
+exports.css = css;
+exports.fonts = fonts;
+exports.images = images;
+exports.buildMayor = buildMayor;
+exports.buildMinor = buildMinor;
+exports.buildProd = buildProd;
+exports.watchJs = watchJs;
+exports.watchCss = watchCss;
+exports.default = def;

@@ -11,15 +11,13 @@ const config = require('../config/gulpfile.config');
  * @returns {Promise}
  */
 function generateFilesHash(filesType, filesPathToCalculateTheHash) {
-    return new Promise(function (resolve, reject) {
-        gulp.src(filesPathToCalculateTheHash + "/**/*." + filesType)
-            .pipe(hash(config.plugin.js.hashFiles))
-            .pipe(hash.manifest(config.names.hashed, config.plugin.js.hashManifest))
-            .pipe(gulp.dest(filesPathToCalculateTheHash))
-            .on('end', resolve);
-    });
+    return gulp
+        .src(filesPathToCalculateTheHash + "/**/*." + filesType)
+        .pipe(hash(config.plugin.js.hashFiles))
+        .pipe(hash.manifest(config.names.hashed, config.plugin.js.hashManifest))
+        .pipe(gulp.dest(filesPathToCalculateTheHash));
 }
 
 module.exports = {
-    generateFilesHash: generateFilesHash,
+    generateFilesHash: generateFilesHash
 };
