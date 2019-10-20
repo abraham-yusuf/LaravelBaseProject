@@ -1,4 +1,4 @@
-const {src, dest, series, parallel} = require('gulp');
+const {src, dest, parallel} = require('gulp');
 const replace = require('gulp-replace');
 const config = require('../config/gulpfile.config');
 const composerFile = require('../../composer.json');
