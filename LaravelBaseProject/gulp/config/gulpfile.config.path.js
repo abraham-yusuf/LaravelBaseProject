@@ -44,6 +44,7 @@ module.exports = {
         },
         fonts: {
             app: public_path + "/fonts/",
+            vendors: public_path + "/fonts/",
         },
         images: {
             vendors: public_path + "/img/",

@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["lazy.js"],"sourcesContent":["require('./lazy/lazy.example');"],"file":"lazy.js"}
