@@ -18,15 +18,14 @@ const css = series(parallel(cssTasks.appCss, cssTasks.vendorCss), cssTasks.hashC
 const fonts = fontsTasks.appFonts;
 const images = imagesTasks.appImages;
 
-const buildProd = buildTasks.buildProd;
-const buildMayor = series(buildTasks.changeMayorVersion, buildProd);
-const buildMinor = series(buildTasks.changeMinorVersion, buildProd);
+const changeMayorVersion = buildTasks.changeMayorVersion;
+const changeMinorVersion = buildTasks.changeMinorVersion;
 
 const watchJs = () => jsTasks.watchJs(js);
 const watchCss = () => jsTasks.watchCss(css);
 
 const clean = parallel(cleanTasks.cleanJs, cleanTasks.cleanCss, cleanTasks.cleanImages, cleanTasks.cleanFonts);
-const def = series(clean, parallel(js, css, fonts, images));
+const build = series(clean, parallel(js, css, fonts, images));
 
 //Exports
 exports.clean = clean;
@@ -34,9 +33,8 @@ exports.js = js;
 exports.css = css;
 exports.fonts = fonts;
 exports.images = images;
-exports.buildMayor = buildMayor;
-exports.buildMinor = buildMinor;
-exports.buildProd = buildProd;
+exports.changeMayorVersion = changeMayorVersion;
+exports.changeMinorVersion = changeMinorVersion;
 exports.watchJs = watchJs;
 exports.watchCss = watchCss;
-exports.default = def;
+exports.default = build;

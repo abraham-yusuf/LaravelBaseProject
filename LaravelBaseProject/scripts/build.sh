@@ -1,16 +1,15 @@
 #! /bin/sh
 
 #questo script va lanciato cosí:
-#./build.sh <releaseType> <envType> <publicFolderName>
-#releaseType: mayor o minor (cambia automaticamente il num di versione di 1e fa commit e zip) o onlybuild (non fa nulla, solo crea cartella)
-#envType: development o production (per es in prod app.js sará minificato)
-#publicFolderName: public o public_html o quello che vuoi
+#./build.sh <releaseType>
+#releaseType:
+# -M crea una mayor release e fa il commit di tutto,
+# -m crea una minor release e fa il commit di tutto,
+# se non passo nessun parametro solo fa il build
 
-RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
 NC='\033[0m' # No Color
 
 clear
@@ -19,13 +18,17 @@ printf "${BLUE}***************************************************************\n
 printf "********************* PROJECT BUILDING SCRIPT ************************\n"
 printf "**********************************************************************\n"
 
-releaseType=$1
-envType=$2
-publicFolderName=$3
+if [ "$*" = "*-M*" ]; then
+  releaseType='mayor';
+elif [ "$*" = "*-m*" ]; then
+  releaseType='minor';
+else
+  releaseType='onlybuild';
+fi
 
-printf "\n${YELLOW} Version release type:${NC}${releaseType}\n"
-printf "\n${YELLOW} Env type:${NC}${envType}\n"
-printf "\n${YELLOW} Public folder name:${NC}${publicFolderName}\n"
+printf "\n${YELLOW} Version release type:${NC}\n"
+
+printf "${releaseType}\n";
 
 printf "\n${GREEN} - Going to the project folder:${NC}\n"
 
@@ -49,28 +52,19 @@ php artisan config:cache
 
 printf "\n${GREEN} - Building a new app version:${NC}\n"
 
-gulp --env=${envType}
+if [ "${releaseType}" = 'mayor' ]; then
+  gulp changeMayorVersion
+elif [ "${releaseType}" = 'minor' ]; then
+  gulp changeMinorVersion
+else
+  gulp default
+fi
 
-gulpReleaseType=${releaseType};
-
-if [ "$releaseType" == "onlybuild" ]; then
-      gulpReleaseType="prod"
-    fi
-
-gulp build:${gulpReleaseType} --pub=${publicFolderName}
-
-appName=($(jq -r '.name' composer.json))
 appVersion=($(jq -r '.version' composer.json))
 
 if [ "$releaseType" != "onlybuild" ]; then
-    scripts/createZip.sh ${appName} ${appVersion}
-    scripts/commitVersionAndTag.sh ${appName} ${appVersion}
+    scripts/commitVersionAndTag.sh ${appVersion}
 fi
-
-printf "\n${GREEN} - Opening 'build' directory:${NC}\n"
-
-open ./build
-
 
 printf "${NC}\n"
 
