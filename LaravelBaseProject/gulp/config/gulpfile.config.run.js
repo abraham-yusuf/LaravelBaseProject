@@ -2,16 +2,16 @@ const _ = require('lodash');
 const params = require('./gulpfile.config.params');
 
 const run = {
-    development: {
+    noMin: {
         js: {
             uglify: false
         }
     },
-    production: {
+    min: {
         js: {
             uglify: true
         }
     }
 };
 
-module.exports = _.merge({}, run.development, run[params.env]);
+module.exports = _.merge({}, run.noMin, run[params.env]);

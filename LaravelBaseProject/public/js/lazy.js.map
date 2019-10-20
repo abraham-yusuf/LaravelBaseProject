@@ -1,1 +1,1 @@
-{"version":3,"names":[],"mappings":"","sources":["lazy.js"],"sourcesContent":["require('./lazy/lazy.example');"],"file":"lazy.js"}
+{"version":3,"sources":["lazy.js"],"names":["require"],"mappings":";;AAAAA,OAAO,CAAC,qBAAD,CAAP","sourcesContent":["require('./lazy/lazy.example');"],"file":"lazy.js"}

@@ -1,5 +1,5 @@
 //Per lanciare con diversi environments:
-// $ gulp <taskname> --env=production --pub=public_html
+// $ gulp <taskname> --env=production
 
 const {series, parallel} = require('gulp');
 
@@ -18,14 +18,14 @@ const css = series(parallel(cssTasks.appCss, cssTasks.vendorCss), cssTasks.hashC
 const fonts = fontsTasks.appFonts;
 const images = imagesTasks.appImages;
 
-const changeMayorVersion = buildTasks.changeMayorVersion;
-const changeMinorVersion = buildTasks.changeMinorVersion;
-
 const watchJs = () => jsTasks.watchJs(js);
 const watchCss = () => jsTasks.watchCss(css);
 
 const clean = parallel(cleanTasks.cleanJs, cleanTasks.cleanCss, cleanTasks.cleanImages, cleanTasks.cleanFonts);
-const build = series(clean, parallel(js, css, fonts, images));
+const build = series(parallel(js, css, fonts, images));
+
+const buildMayor = series(build, buildTasks.changeMayorVersion);
+const buildMinor = series(build, buildTasks.changeMinorVersion);
 
 //Exports
 exports.clean = clean;
@@ -33,8 +33,8 @@ exports.js = js;
 exports.css = css;
 exports.fonts = fonts;
 exports.images = images;
-exports.changeMayorVersion = changeMayorVersion;
-exports.changeMinorVersion = changeMinorVersion;
+exports.buildMayor = buildMayor;
+exports.buildMinor = buildMinor;
 exports.watchJs = watchJs;
 exports.watchCss = watchCss;
 exports.default = build;
