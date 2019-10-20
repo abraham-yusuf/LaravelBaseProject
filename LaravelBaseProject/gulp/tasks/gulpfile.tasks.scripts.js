@@ -11,22 +11,17 @@ const hashManager = require('./gulpfile.tasks.hash');
 function appJs() {
     return src(config.paths.src.js.app)
         .pipe(sourcemaps.init())
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
+        .pipe(babel(config.plugin.js.babel))
         .pipe(gulpif(config.run.js.uglify, uglify(config.plugin.js.uglify)))
         .pipe(rename(config.names.js.app))
         .pipe(sourcemaps.write('.'))
         .pipe(dest(config.paths.dest.js.app));
 }
 
-
 function lazyJs() {
     return src(config.paths.src.js.lazy)
         .pipe(sourcemaps.init())
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
+        .pipe(babel(config.plugin.js.babel))
         .pipe(gulpif(config.run.js.uglify, uglify(config.plugin.js.uglify)))
         .pipe(rename(config.names.js.lazy))
         .pipe(sourcemaps.write('.'))
@@ -36,9 +31,7 @@ function lazyJs() {
 function authJs() {
     return src(config.paths.src.js.auth)
         .pipe(sourcemaps.init())
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
+        .pipe(babel(config.plugin.js.babel))
         .pipe(gulpif(config.run.js.uglify, uglify(config.plugin.js.uglify)))
         .pipe(rename(config.names.js.auth))
         .pipe(sourcemaps.write('.'))
@@ -47,9 +40,7 @@ function authJs() {
 
 function vendorsJs() {
     return src(config.paths.src.js.vendors)
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
+        .pipe(babel(config.plugin.js.babel))
         .pipe(rename(config.names.js.vendors))
         .pipe(dest(config.paths.dest.js.vendors));
 }

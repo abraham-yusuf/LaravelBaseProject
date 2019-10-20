@@ -24,8 +24,8 @@ const watchCss = () => jsTasks.watchCss(css);
 const clean = parallel(cleanTasks.cleanJs, cleanTasks.cleanCss, cleanTasks.cleanImages, cleanTasks.cleanFonts);
 const build = series(parallel(js, css, fonts, images));
 
-const buildMayor = series(build, buildTasks.changeMayorVersion);
-const buildMinor = series(build, buildTasks.changeMinorVersion);
+const changeMayor = buildTasks.changeMayorVersion;
+const changeMinor =  buildTasks.changeMinorVersion;
 
 //Exports
 exports.clean = clean;
@@ -33,8 +33,8 @@ exports.js = js;
 exports.css = css;
 exports.fonts = fonts;
 exports.images = images;
-exports.buildMayor = buildMayor;
-exports.buildMinor = buildMinor;
+exports.changeMayor = changeMayor;
+exports.changeMinor = changeMinor;
 exports.watchJs = watchJs;
 exports.watchCss = watchCss;
 exports.default = build;

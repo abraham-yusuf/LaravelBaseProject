@@ -23,6 +23,9 @@ const plugin = {
             uglify: {
                 mangle: false
             },
+            babel: {
+                presets: ['@babel/env']
+            },
             hashFiles: {
                 template: '<%= name %><%= ext %>?<%= hash %>'
             },
@@ -43,6 +46,9 @@ const plugin = {
         js: {
             uglify: {
                 mangle: true
+            },
+            babel: {
+                presets: ['@babel/env']
             },
             hashFiles: {
                 template: '<%= name %>?<%= hash %><%= ext %>'

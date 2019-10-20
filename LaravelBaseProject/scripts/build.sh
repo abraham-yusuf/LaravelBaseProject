@@ -53,12 +53,14 @@ php artisan config:cache
 printf "\n${GREEN} - Building a new app version:${NC}\n"
 
 gulp clean
-gulp default --env=noMin
+gulp default --env=development
+gulp default --env=production
 
 if [ "${releaseType}" = 'mayor' ]; then
-  gulp buildMayor --env=min
+  gulp changeMinor
 elif [ "${releaseType}" = 'minor' ]; then
-  gulp buildMinor --env=min
+  gulp changeMayor
+fi
 
 appVersion=($(jq -r '.version' composer.json))
 
