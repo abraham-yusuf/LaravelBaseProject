@@ -60,7 +60,7 @@ gulp clean
 gulp default --env=development
 gulp default --env=production
 
-printf "\n${YELLOW} - Changing minor version:${NC}\n"
+printf "\n${YELLOW} - Changing ${releaseType} version:${NC}\n"
 
 if [ ${releaseType} == "mayor" ]
 then
