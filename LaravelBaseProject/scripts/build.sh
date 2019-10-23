@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 
 #questo script va lanciato cosí:
 #./build.sh <releaseType>
@@ -18,9 +18,11 @@ printf "${BLUE}***************************************************************\n
 printf "********************* PROJECT BUILDING SCRIPT ************************\n"
 printf "**********************************************************************\n"
 
-if [ "$*" = "*-M*" ]; then
+echo $1
+
+if [ $1 = "-M" ]; then
   releaseType='mayor';
-elif [ "$*" = "*-m*" ]; then
+elif [ $1 = "-m" ]; then
   releaseType='minor';
 else
   releaseType='onlybuild';
