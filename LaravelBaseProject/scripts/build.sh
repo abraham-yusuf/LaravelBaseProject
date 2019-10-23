@@ -60,16 +60,12 @@ gulp clean
 gulp default --env=development
 gulp default --env=production
 
-printf "\n${YELLOW} - Changing ${releaseType} version:${NC}\n"
-
 if [ ${releaseType} == "mayor" ]
 then
-  printf "\n${GREEN} - Changing minor version:${NC}\n"
-  gulp changeMinor
+  gulp changeMayor
 elif [ ${releaseType} == 'minor' ]
 then
-  printf "\n${GREEN} - Changing mayor version:${NC}\n"
-  gulp changeMayor
+  gulp changeMinor
 fi
 
 appVersion=($(jq -r '.version' composer.json))
