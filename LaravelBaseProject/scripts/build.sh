@@ -20,9 +20,11 @@ printf "**********************************************************************\n
 
 echo $1
 
-if [ $1 = "-M" ]; then
-  releaseType='mayor';
-elif [ $1 = "-m" ]; then
+if [ $1 == "-M" ]
+then
+  releaseType='mayor'
+elif [ $1 == "-m" ]
+then
   releaseType='minor';
 else
   releaseType='onlybuild';
@@ -58,9 +60,13 @@ gulp clean
 gulp default --env=development
 gulp default --env=production
 
-if [ "${releaseType}" = 'mayor' ]; then
+if [ ${releaseType} == "mayor" ]
+then
+  printf "\n${GREEN} - Changing minor version:${NC}\n"
   gulp changeMinor
-elif [ "${releaseType}" = 'minor' ]; then
+elif [ ${releaseType} == 'minor' ]
+then
+  printf "\n${GREEN} - Changing mayor version:${NC}\n"
   gulp changeMayor
 fi
 
