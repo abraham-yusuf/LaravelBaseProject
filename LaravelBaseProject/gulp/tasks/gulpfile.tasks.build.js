@@ -3,17 +3,17 @@ const replace = require('gulp-replace');
 const config = require('../config/gulpfile.config');
 const composerFile = require('../../composer.json');
 
-function changeMinorVersion() {
-    return increaseProjectVersion();
+async function changeMinorVersion() {
+    return await increaseProjectVersion();
 }
 
-function changeMayorVersion() {
-    return increaseProjectVersion(true);
+async function changeMayorVersion() {
+    return await increaseProjectVersion(true);
 }
 
 //Private Functions
 
-function increaseProjectVersion(isMayor) {
+async function increaseProjectVersion(isMayor) {
     let versionObject = getCurrentProjectVersionObject();
     if (isMayor) {
         versionObject.mayor++;
@@ -22,7 +22,7 @@ function increaseProjectVersion(isMayor) {
     }
     let newVersion = versionObject.mayor + "." + versionObject.minor;
 
-    return changeProjectVersion(newVersion);
+    return await changeProjectVersion(newVersion);
 }
 
 function getCurrentProjectVersionObject() {
@@ -39,31 +39,31 @@ function getCurrentProjectVersionObject() {
     }
 }
 
-function changeProjectVersion(newVersion) {
-    return parallel(
-        () => setConfigFileVersion(newVersion),
-        () => changeComposerFileVersion(newVersion),
-        () => changeEnvFilesVersion(newVersion)
-    );
+async function changeProjectVersion(newVersion) {
+    await setConfigFileVersion(newVersion);
+    await changeComposerFileVersion(newVersion);
+    return await changeEnvFilesVersion(newVersion);
 }
 
-function setConfigFileVersion() {
+
+async function setConfigFileVersion(newVersion) {
     return src([config.build.config_app_path])
-        .pipe(replace(/('version'\s*=>\s*env\('APP_VERSION',\s*')(.*)('\),)/g, "$1" + newProjectVersion + "$3"))
+        .pipe(replace(/('version'\s*=>\s*env\('APP_VERSION',\s*')(.*)('\),)/g, "$1" + newVersion + "$3"))
         .pipe(dest("./config/"));
 }
 
-function changeComposerFileVersion() {
+async function changeComposerFileVersion(newVersion) {
     return src([config.build.composer_json_path])
-        .pipe(replace(/("version"\s*:\s*")(.*)(")/g, "$1" + newProjectVersion + "$3"))
+        .pipe(replace(/("version"\s*:\s*")(.*)(")/g, "$1" + newVersion + "$3"))
         .pipe(dest("."));
 }
 
-function changeEnvFilesVersion() {
+async function changeEnvFilesVersion(newVersion) {
     return src(config.build.all_env_files_path)
-        .pipe(replace(/(APP_VERSION=\s*)(.*)/g, "$1" + newProjectVersion))
+        .pipe(replace(/(APP_VERSION=\s*)(.*)/g, "$1" + newVersion))
         .pipe(dest("."));
 }
+
 
 module.exports = {
     changeMayorVersion: changeMayorVersion,
