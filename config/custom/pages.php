@@ -2,29 +2,6 @@
 
 return [
     'INDEX' => 1,
-    'OFFERS' => 2,
-    'OFFER_SHOW' => 3,
-    'PROJECTS' => 4,
-    'PROJECT_SHOW' => 5,
-    'PARTNERS' => 6,
-    'SERVICES' => 7,
-    'CONTACT_US' => 8,
-
     'AUTH_LOGIN' => 1001,
     'AUTH_INDEX' => 1010,
-    'AUTH_CATEGORIES' => 1011,
-    'AUTH_CATEGORY_CREATE' => 1012,
-    'AUTH_CATEGORY_EDIT' => 1013,
-    'AUTH_CATEGORIES_SORT' => 1014,
-    'AUTH_OFFERS' => 1020,
-    'AUTH_OFFER_CREATE' => 1021,
-    'AUTH_OFFER_EDIT' => 1022,
-    'AUTH_OFFERS_SORT' => 1023,
-    'AUTH_OFFER_IMAGES' => 1024,
-    'AUTH_PROJECTS' => 1030,
-    'AUTH_PROJECT_CREATE' => 1031,
-    'AUTH_PROJECT_EDIT' => 1032,
-    'AUTH_PROJECTS_SORT' => 1033,
-    'AUTH_PROJECT_IMAGES' => 1034,
-
 ];

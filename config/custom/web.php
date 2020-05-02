@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'title' => 'Crosetti Interior Design - mobili, progetti e arredamento per la tua casa'
+    'htmlTitleKey' => 'web.htmlTitle',
+    'htmlMetaDescriptionKey' => 'web.htmlMetaDescription',
+    'htmlMetaKeywordsKey' => 'web.htmlMetaKeywords',
 ];

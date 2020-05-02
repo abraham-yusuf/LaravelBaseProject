@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\ViewModelsServices\PageViewModelService;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -32,13 +33,27 @@ class RegisterController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
+     * @var PageViewModelService
+     */
+    private $pageViewModelService;
+
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(PageViewModelService $pageViewModelService)
     {
         $this->middleware('guest');
+
+        $this->pageViewModelService = $pageViewModelService;
+    }
+
+    public function showRegistrationForm()
+    {
+        $model = $this->pageViewModelService->getViewModelByConfigurationKey('custom.pages.auth.register');
+        return view($model->viewPath, compact('model'));
     }
 
     /**

@@ -52,9 +52,9 @@ class PageViewModelService {
         try {
             $pageConfiguration = config($configurationKey);
             $pageViewModel->id = $pageConfiguration['id'];
-            $pageViewModel->htmlTitle = __($pageConfiguration['htmlTitleKey']);
-            $pageViewModel->htmlMetaDescription =__($pageConfiguration['htmlMetaDescriptionKey']);
-            $pageViewModel->htmlMetaKeywords =__($pageConfiguration['htmlMetaKeywordsKey']);
+            $pageViewModel->htmlTitle = !empty($pageConfiguration['htmlTitleKey']) ? __($pageConfiguration['htmlTitleKey']) : __(config('custom.web.htmlTitleKey'));
+            $pageViewModel->htmlMetaDescription = !empty($pageConfiguration['htmlMetaDescriptionKey']) ? __($pageConfiguration['htmlMetaDescriptionKey']) : __(config('custom.web.htmlMetaDescriptionKey'));
+            $pageViewModel->htmlMetaKeywords = !empty($pageConfiguration['htmlMetaKeywordsKey']) ? __($pageConfiguration['htmlMetaKeywordsKey']) : __(config('custom.web.htmlMetaKeywordsKey'));
             $pageViewModel->title = __($pageConfiguration['titleKey']);
             $pageViewModel->description = __($pageConfiguration['descriptionKey']);
             $pageViewModel->viewPath = __($pageConfiguration['viewPath']);

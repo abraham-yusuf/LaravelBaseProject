@@ -1,3 +1,4 @@
+@import "loading-spinner";
 form {
 
     .form__inputs {
@@ -18,7 +19,7 @@ form {
 
             input:not([type='checkbox']), textarea, .form__content-editable {
                 appearance: none;
-                width: 100%;
+                width: 80%;
                 border: 0;
                 font-family: inherit;
                 padding: 12px 0;
@@ -29,6 +30,10 @@ form {
                 border-radius: 0;
                 color: #223254;
                 transition: all 0.15s ease;
+
+                @media (--no-mobileDevice) {
+                    width: 50%;
+                }
 
                 &:hover {
                     background: rgba(34, 50, 84, 0.03);
@@ -105,7 +110,7 @@ form {
     left: 0;
     right: 0;
     background: var(--corporateColor);
-    color: var(--whiteColor);
+    color: var(--complementaryColor);
     text-align: center;
     line-height: 2.5;
     overflow: hidden;
@@ -115,9 +120,8 @@ form {
     .close {
         position: absolute;
         right: 10px;
-        color: var(--whiteColor);
+        color: var(--complementaryColor);
         cursor: pointer;
-        top: 10px;
     }
 }
 

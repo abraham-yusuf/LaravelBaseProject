@@ -3,27 +3,24 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\ViewModelsServices\PageViewModelService;
 use Illuminate\Http\Request;
 
-class AuthController extends Controller
+class AuthPagesController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @var PageViewModelService
      */
-    public function __construct()
-    {
+    private $pageViewModelService;
+
+    public function __construct(PageViewModelService $pageViewModelService) {
+        $this->pageViewModelService = $pageViewModelService;
+
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('pages.auth.index');
+    public function index() {
+        $model = $this->pageViewModelService->getViewModelByConfigurationKey('custom.pages.auth.index');
+        return view($model->viewPath, compact('model'));
     }
 }

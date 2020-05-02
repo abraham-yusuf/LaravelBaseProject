@@ -41,20 +41,25 @@ export default class FormValidator {
      */
     validateField = (field) => {
         try {
-            if(field && field.validations && field.validations.length > 0) {
-                let validations = field.validations;
-                let validValidationCounter = 0;
-                for(let validation of validations) {
-                    if(validation != null) {
-                        const validationFunction = this.#validationFunctions[validation.id];
-                        var isOk = validationFunction(field.value, validation.params);
-                        if(isOk) {
-                            validation.isValid = true;
-                            validValidationCounter++;
+            if(field) {
+                if(field.validations && field.validations.length > 0) {
+                    let validations = field.validations;
+                    let validValidationCounter = 0;
+                    for(let validation of validations) {
+                        if(validation != null) {
+                            const validationFunction = this.#validationFunctions[validation.id];
+                            var isOk = validationFunction(field.value, validation.params);
+                            if(isOk) {
+                                validation.isValid = true;
+                                validValidationCounter++;
+                            }
                         }
                     }
+                    if(field.validations.length === validValidationCounter) {
+                        field.isValid = true;
+                    }
                 }
-                if(field.validations.length === validValidationCounter) {
+                else {
                     field.isValid = true;
                 }
             }

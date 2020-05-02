@@ -1,5 +1,5 @@
-import ApiRoutes from '../../api/api.routes';
-import ApiService from '../../api/api.service';
+import ApiRoutes from '../api/api.routes';
+import ApiService from '../api/api.service';
 
 export default class JSLogApi {
     constructor() {

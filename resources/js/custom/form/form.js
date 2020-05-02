@@ -25,6 +25,9 @@ export default class Form {
                 else {
                     if(this.#captcha.isEnabled(formId)) {
                         isValid = await this.#captcha.executeCaptcha(formId);
+                        if(!isValid) {
+                            this.#view.showGenericFormError();
+                        }
                     }
                 }
                 if(isValid) {
@@ -32,7 +35,6 @@ export default class Form {
                 }
                 else {
                     this.#view.setFormInEditMode(formId);
-                    this.#view.showGenericFormError();
                 }
             }catch(e) {
                 log.error(e);

@@ -37,13 +37,13 @@ abstract class FormBuilder {
         $this->fieldsConfig = $this->formConfig['fields'];
     }
 
-    public function createFormViewModelByConfigurationAndEntity(string $actionUrl, string $saveTextButton, $projectEntity = null) {
+    public function createFormViewModelByConfigurationAndEntity(string $actionUrl, string $saveTextButton, $customEntity = null) {
         $outcome = $this->formHelper->createEmptyFormViewModelByConfiguration(
             $this->formConfig,
             $actionUrl,
             $saveTextButton);
 
-        return $this->fillFormFieldValuesWithEntityAttributes($outcome, $projectEntity);
+        return $this->fillFormFieldValuesWithEntityAttributes($outcome, $customEntity);
     }
 
     /**

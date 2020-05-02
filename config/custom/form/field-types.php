@@ -11,4 +11,5 @@ return [
     'PRICE' => 8,
     'DATE' => 9,
     'SELECTBOX' => 10,
+    'HIDDEN' => 11,
 ];

@@ -1,5 +1,5 @@
 
-<form id="{{ $model->id }}" method="POST" action="{{ $model->actionUrl }}">
+<form id="{{ $model->id }}" method="POST" action="{{ $model->actionUrl }}" novalidate>
     @csrf
 
     @include('custom.form.messages.errors')

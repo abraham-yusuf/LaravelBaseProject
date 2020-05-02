@@ -6,7 +6,7 @@ return [
     'htmlMetaDescriptionKey' => 'page-auth-login.htmlMetaDescription',
     'htmlMetaKeywordsKey' => 'page-auth-login.htmlMetaKeywords',
     'titleKey' => 'page-auth-login.title',
-    'shortNameKey' => 'page-auth-categories.shortName',
+    'shortNameKey' => 'page-auth-login.shortName',
     'descriptionKey' => 'page-auth-login.description',
     'viewPath' => 'pages.auth.login'
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Custom\Form\Helpers;
 
+use App\Custom\Form\Models\Fields\HiddenFieldModel;
 use App\Custom\Logging\AppLog;
 use App\Custom\Form\Models\Fields\CheckboxArrayFieldModel;
 use App\Custom\Form\Models\Fields\CheckboxItemFieldModel;
@@ -100,6 +101,9 @@ class FieldsHelper {
                     break;
                 case config('custom.form.field-types.SELECTBOX'):
                     $outcome = $this->getModelForSelectbox($fieldConfiguration);
+                    break;
+                case config('custom.form.field-types.HIDDEN'):
+                    $outcome = $this->getModelForHidden($fieldConfiguration);
                     break;
             }
 
@@ -358,6 +362,21 @@ class FieldsHelper {
         } catch (\Exception $e) {
             AppLog::error($e);
             return new DateFieldModel();
+        }
+    }
+
+    /**
+     * @param array $configuration
+     * @return HiddenFieldModel
+     */
+    private function getModelForHidden($configuration) {
+        try {
+            $outcome = new HiddenFieldModel();
+            return $outcome;
+
+        } catch (\Exception $e) {
+            AppLog::error($e);
+            return new HiddenFieldModel();
         }
     }
 

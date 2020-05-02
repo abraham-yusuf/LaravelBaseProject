@@ -38,6 +38,9 @@
                     @case(config('custom.form.field-types.DATE'))
                         @include('custom.form.fields._date', ['field' => $field])
                     @break
+                    @case(config('custom.form.field-types.HIDDEN'))
+                        @include('custom.form.fields._hidden', ['field' => $field])
+                    @break
                 @endswitch
 
                 <div class="form__field--error-text-container">
