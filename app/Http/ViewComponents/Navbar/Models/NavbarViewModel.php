@@ -5,19 +5,29 @@ namespace App\Http\ViewComponents\Navbar\Models;
 class NavbarViewModel {
 
     /**
-     * @var array
+     * @var NavbarLinkViewModel[]
      */
-    public $sectionslinks;
+    public $pageLinks;
 
     /**
-     * @var NavbarLinkViewModel
+     * @var NavbarLinkViewModel[]
      */
-    public $loginPageLink;
+    public $userPageLinks;
 
     /**
-     * @var NavbarLinkViewModel
+     * @var bool
      */
-    public $registerPageLink;
+    public $isMultilanguageActive;
+
+    /**
+     * @var NavbarLinkViewModel[]
+     */
+    public $languageLinks;
+
+    /**
+     * @var string
+     */
+    public $currentLanguage;
 
     /**
      * @var bool
@@ -30,8 +40,11 @@ class NavbarViewModel {
     public $userName;
 
     public function __construct() {
-        $this->sectionslinks = [];
+        $this->pageLinks = [];
+        $this->userPageLinks = [];
+        $this->languageLinks = [];
         $this->isUserAuth = false;
+        $this->isMultilanguageActive = false;
     }
 
 }

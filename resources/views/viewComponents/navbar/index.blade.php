@@ -1,7 +1,7 @@
 @if (Route::has('login'))
 <div class="navbar">
-    @foreach($model->sectionslinks as $sectionLink)
-        <a href="{{$sectionLink->url}}" class="{{ $sectionLink->isActive ? 'active' : "" }}">{{$sectionLink->text}}</a>
+    @foreach($model->pageLinks as $pageLink)
+        <a href="{{$pageLink->url}}" class="{{ $pageLink->isActive ? 'active' : "" }}">{{$pageLink->text}}</a>
     @endforeach
 
     @if ($model->isUserAuth)
@@ -10,28 +10,26 @@
             </a>
 
     @else
-        @foreach($model->sectionslinks as $sectionLink)
-            <a href="{{$model->loginPageLink->url}}" class="{{ $model->loginPageLink->isActive ? 'active' : "" }}">{{$model->loginPageLink->text}}</a>
-            <a href="{{$model->registerPageLink->url}}" class="{{ $model->registerPageLink->isActive ? 'active' : "" }}">{{$model->registerPageLink->text}}</a>
+        @foreach($model->userPageLinks as $userPageLink)
+            <a href="{{$userPageLink->url}}" class="{{ $userPageLink->isActive ? 'active' : "" }}">{{$userPageLink->text}}</a>
         @endforeach
     @endif
 
-    <div class="dropdown">
-        <button class="dropbtn">
-            {{ app()->getLocale() }}
-            <i class="la la-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-            @foreach (config('custom.languages.locales') as $lang => $language)
-            @if ($lang != app()->getLocale())
-            <a href="{{ route('lang.switch', $lang) }}">
-                {{ $language }}
-            </a>
-            @endif
-            @endforeach
+    @if ($model->isMultilanguageActive)
+        <div class="dropdown">
+            <button class="dropbtn">
+                {{ $model->currentLanguage }}
+                <i class="la la-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                @foreach ($model->languageLinks as $languageLink)
+                <a href="{{ $languageLink->url }}">
+                    {{ $languageLink->text }}
+                </a>
+                @endforeach
+            </div>
         </div>
-    </div>
-
+    @endif
 
 </div>
 @endif

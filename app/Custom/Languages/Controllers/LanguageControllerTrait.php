@@ -2,10 +2,20 @@
 
 namespace App\Custom\Languages\Controllers;
 
+use App\Custom\Languages\Services\LanguagesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 
 trait LanguageControllerTrait  {
+
+    /**
+     * @var LanguagesService
+     */
+    private $languagesService;
+
+    public function __construct(LanguagesService $languagesService) {
+        $this->languagesService = $languagesService;
+    }
 
     public function switchLang(Request $request, $lang)
     {
