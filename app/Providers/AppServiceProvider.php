@@ -25,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
+        app()->setLocale($request->segment(1));
+
         Blade::directive('render', function ($component) {
             return "<?php echo (app($component))->toHtml(); ?>";
         });

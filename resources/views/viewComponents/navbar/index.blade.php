@@ -16,21 +16,21 @@
         @endforeach
     @endif
 
-{{--    <div class="dropdown">--}}
-{{--        <button class="dropbtn">--}}
-{{--            {{ app()->getLocale() }}--}}
-{{--            <i class="la la-caret-down"></i>--}}
-{{--        </button>--}}
-{{--        <div class="dropdown-content">--}}
-{{--            @foreach (config('custom.languages.locales') as $lang => $language)--}}
-{{--            @if ($lang != app()->getLocale())--}}
-{{--            <a href="{{ route('lang.switch', $lang) }}">--}}
-{{--                {{ $language }}--}}
-{{--            </a>--}}
-{{--            @endif--}}
-{{--            @endforeach--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    <div class="dropdown">
+        <button class="dropbtn">
+            {{ app()->getLocale() }}
+            <i class="la la-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            @foreach (config('custom.languages.locales') as $lang => $language)
+            @if ($lang != app()->getLocale())
+            <a href="{{ route('lang.switch', $lang) }}">
+                {{ $language }}
+            </a>
+            @endif
+            @endforeach
+        </div>
+    </div>
 
 
 </div>
