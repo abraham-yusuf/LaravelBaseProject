@@ -40,6 +40,11 @@ class PageViewModel {
     public $viewPath;
 
     /**
+     * @var string
+     */
+    public $currentLanguageId;
+
+    /**
      * @var BreadcrumbViewModel[]
      */
     public $breadcrumbs;

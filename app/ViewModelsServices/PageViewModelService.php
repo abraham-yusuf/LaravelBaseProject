@@ -2,6 +2,7 @@
 
 namespace App\ViewModelsServices;
 
+use App\Custom\Languages\Services\LanguagesService;
 use App\Custom\Logging\AppLog;
 use App\ViewModelPageBuilders\ViewModelPageBuilderFactory;
 use App\ViewModels\Pages\PageViewModel;
@@ -18,13 +19,20 @@ class PageViewModelService {
      */
     private $breadcrumbViewModelService;
 
+    /**
+     * @var LanguagesService
+     */
+    private $languagesService;
+
 
     function __construct(
+        LanguagesService $languagesService,
         ViewModelPageBuilderFactory $viewModelPageBuilderFactory,
         BreadcrumbViewModelService $breadcrumbViewModelService) {
 
         $this->breadcrumbViewModelService = $breadcrumbViewModelService;
         $this->viewModelPageBuilderFactory = $viewModelPageBuilderFactory;
+        $this->languagesService = $languagesService;
     }
 
     /**
@@ -58,7 +66,7 @@ class PageViewModelService {
             $pageViewModel->title = __($pageConfiguration['titleKey']);
             $pageViewModel->description = __($pageConfiguration['descriptionKey']);
             $pageViewModel->viewPath = __($pageConfiguration['viewPath']);
-
+            $pageViewModel->currentLanguageId = str_replace('_', '-', $this->languagesService->getCurrentLanguage()->id);
             $pageViewModel->breadcrumbs = $this->breadcrumbViewModelService->getBreadcrumbByPageId($pageConfiguration['id']);
 
             return $pageViewModel;
