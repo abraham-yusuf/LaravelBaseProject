@@ -34,8 +34,9 @@ trait LanguageControllerTrait  {
         // Store the segments of the last request as an array
         $segments = $previous_request->segments();
 
-        // Check if the first segment matches a language code
-        if (array_key_exists($lang, config('custom.languages.locales'))) {
+        $languageEntity = $this->languagesService->getLanguageById($lang);
+
+        if ($languageEntity != null) {
             $request->session()->put('applocale', $lang);
 
             // If it was indeed a translated route name

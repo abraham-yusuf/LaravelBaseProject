@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 
 abstract class FormBuilder {
 
+    use TranslatableFormBuilderTrait;
+
     /**
      * @var FormHelper
      */
@@ -73,22 +75,6 @@ abstract class FormBuilder {
      * @return CustomEntity
      */
     protected abstract function createEntityByFormViewModel($formViewModel);
-
-    /**
-     * @param string $fieldValue
-     * @return TranslationEntity[]
-     */
-    protected function parseTranslatableFieldValue(string $fieldValue) {
-        $outcome = [];
-        $locales = config('custom.languages.locales');
-        foreach ($locales as $key => $value) {
-            $translationEntity = new TranslationEntity($key, $fieldValue);
-            array_push($outcome, $translationEntity);
-        }
-
-        return $outcome;
-
-    }
 
     protected function parseStringFieldValue($fieldValue) {
         return  $fieldValue;

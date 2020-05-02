@@ -68,4 +68,22 @@ class LanguagesService {
         }
         return $outcome;
     }
+
+    /**
+     * @param string $languageId
+     * @return LanguageEntity|null
+     */
+    public function getLanguageById($languageId) {
+        $outcome = null;
+        $availableLanguages = $this->getAvailableLanguages();
+        foreach ($availableLanguages as $availableLanguage) {
+            if ($availableLanguage->id == $languageId) {
+                $outcome = $availableLanguage;
+                break;
+            }
+        }
+        return $outcome;
+    }
+
+
 }

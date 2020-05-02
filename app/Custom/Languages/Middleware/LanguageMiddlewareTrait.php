@@ -2,20 +2,32 @@
 
 namespace App\Custom\Languages\Middleware;
 
+use App\Custom\Languages\Services\LanguagesService;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 trait LanguageMiddlewareTrait {
 
+    /**
+     * @var LanguagesService
+     */
+    private $languagesService;
+
+    public function __construct(LanguagesService $languagesService) {
+        $this->languagesService = $languagesService;
+    }
+
     public function handle(Request $request, Closure $next) {
         // Check if the first segment matches a language code
 
-        if(config('custom.languages.isActiveMultilang')) {
+        if($this->languagesService->isMultilanguageActive()) {
 
-            $lang = $request->segment(1);
+            $langId = $request->segment(1);
 
-            if (!array_key_exists($lang, config('custom.languages.locales'))) {
+            $languageEntity = $this->languagesService->getLanguageById($langId);
+
+            if ($languageEntity == null) {
 
                 // Store segments in array
                 $segments = $request->segments();
@@ -33,7 +45,7 @@ trait LanguageMiddlewareTrait {
                 return redirect()->to(implode('/', $segments));
             }
             else {
-                $request->session()->put('applocale', $lang);
+                $request->session()->put('applocale', $langId);
             }
 
         }
