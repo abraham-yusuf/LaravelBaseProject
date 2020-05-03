@@ -18,11 +18,6 @@ return [
     ],
 
     'static' => [
-        'logo94x94Url' => $imagesBaseUrl . '/logo94x94.svg',
-        'logoGreeen94x94Url' => $imagesBaseUrl . '/logoGreen94x94.svg',
         'defaultLazyPlaceholder' => $imagesBaseUrl . '/lazy-img-placeholder.png',
-        'defaultImageUrl' => $imagesBaseUrl . '/defaultImage_570x370.png',
-        'luigiECarloUrl' => $imagesBaseUrl . '/luigi-carlo.jpg',
-        'footerMapUrl' => $imagesBaseUrl . '/footer_map_570x400.jpg',
     ]
 ];
