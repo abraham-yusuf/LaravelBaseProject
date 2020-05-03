@@ -20,7 +20,7 @@ class AuthPagesController extends Controller
     }
 
     public function index() {
-        $model = $this->pageViewModelService->getViewModelByConfigurationKey('custom.pages.auth.index');
+        $model = $this->pageViewModelService->getViewModelByPageId(config('custom.pages.AUTH_INDEX'));
         return view($model->viewPath, compact('model'));
     }
 }

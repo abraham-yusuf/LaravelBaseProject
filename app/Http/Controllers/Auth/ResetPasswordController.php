@@ -42,7 +42,7 @@ class ResetPasswordController extends Controller
 
     public function showResetForm(Request $request, $token = null)
     {
-        $model = $this->pageViewModelService->getViewModelByConfigurationKey('custom.pages.auth.reset-password', ['token' => $token, 'email' => $request->email]);
+        $model = $this->pageViewModelService->getViewModelByPageId(config('custom.pages.AUTH_RESET_PASSWORD'), ['token' => $token, 'email' => $request->email]);
         return view($model->viewPath, compact('model'));
     }
 }

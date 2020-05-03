@@ -52,7 +52,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $model = $this->pageViewModelService->getViewModelByConfigurationKey('custom.pages.auth.register');
+        $model = $this->pageViewModelService->getViewModelByPageId(config('custom.pages.AUTH_REGISTER'));
         return view($model->viewPath, compact('model'));
     }
 

@@ -32,7 +32,7 @@ class ForgotPasswordController extends Controller
 
     public function showLinkRequestForm()
     {
-        $model = $this->pageViewModelService->getViewModelByConfigurationKey('custom.pages.auth.forgot-password');
+        $model = $this->pageViewModelService->getViewModelByPageId(config('custom.pages.auth.AUTH_FORGOT_PASSWORD'));
         return view($model->viewPath, compact('model'));
     }
 }

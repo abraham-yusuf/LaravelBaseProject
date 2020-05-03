@@ -4,15 +4,16 @@ namespace App\ViewModelsServices;
 
 use App\Custom\Languages\Services\LanguagesService;
 use App\Custom\Logging\AppLog;
-use App\ViewModelPageBuilders\ViewModelPageBuilderFactory;
+use App\Custom\Pages\Entities\PageEntity;
+use App\Custom\Pages\Services\PagesService;
 use App\ViewModels\Pages\PageViewModel;
 
 class PageViewModelService {
 
     /**
-     * @var ViewModelPageBuilderFactory
+     * @var PagesService
      */
-    private $viewModelPageBuilderFactory;
+    private $pagesService;
 
     /**
      * @var BreadcrumbViewModelService
@@ -27,47 +28,48 @@ class PageViewModelService {
 
     function __construct(
         LanguagesService $languagesService,
-        ViewModelPageBuilderFactory $viewModelPageBuilderFactory,
+        PagesService $pagesService,
         BreadcrumbViewModelService $breadcrumbViewModelService) {
 
-        $this->breadcrumbViewModelService = $breadcrumbViewModelService;
-        $this->viewModelPageBuilderFactory = $viewModelPageBuilderFactory;
         $this->languagesService = $languagesService;
+        $this->pagesService = $pagesService;
+        $this->breadcrumbViewModelService = $breadcrumbViewModelService;
     }
 
     /**
-     * @param string $configurationKey
+     * @param int $pageId
      * @param array $params
      * @return PageViewModel|null
      */
-    public function getViewModelByConfigurationKey (string $configurationKey, $params = []) {
-        $viewModelPageBuilder = $this->viewModelPageBuilderFactory->getViewModelPageBuilderByConfigurationKey($configurationKey);
+    public function getViewModelByPageId ($pageId, $params = []) {
+        $pageEntity = $this->pagesService->getPageById($pageId);
+
+        $viewModelPageBuilder = $pageEntity->viewModelPageBuilder;
 
         /** @var PageViewModel $viewModel */
         $viewModel = $viewModelPageBuilder->createNewViewModel();
 
-        $viewModel = $this->setInitialDataForPage($viewModel, $configurationKey);
+        $viewModel = $this->setInitialDataForPage($viewModel, $pageEntity);
 
         return $viewModelPageBuilder->fillPageViewModel($viewModel, $params);
     }
 
     /**
      * @param PageViewModel $pageViewModel
-     * @param string $configurationKey
+     * @param PageEntity $pageEntity
      * @return PageViewModel|null
      */
-    private function setInitialDataForPage(PageViewModel $pageViewModel,  string $configurationKey) {
+    private function setInitialDataForPage(PageViewModel $pageViewModel,  PageEntity $pageEntity) {
         try {
-            $pageConfiguration = config($configurationKey);
-            $pageViewModel->id = $pageConfiguration['id'];
-            $pageViewModel->htmlTitle = !empty($pageConfiguration['htmlTitleKey']) ? __($pageConfiguration['htmlTitleKey']) : __(config('custom.web.htmlTitleKey'));
-            $pageViewModel->htmlMetaDescription = !empty($pageConfiguration['htmlMetaDescriptionKey']) ? __($pageConfiguration['htmlMetaDescriptionKey']) : __(config('custom.web.htmlMetaDescriptionKey'));
-            $pageViewModel->htmlMetaKeywords = !empty($pageConfiguration['htmlMetaKeywordsKey']) ? __($pageConfiguration['htmlMetaKeywordsKey']) : __(config('custom.web.htmlMetaKeywordsKey'));
-            $pageViewModel->title = __($pageConfiguration['titleKey']);
-            $pageViewModel->description = __($pageConfiguration['descriptionKey']);
-            $pageViewModel->viewPath = __($pageConfiguration['viewPath']);
-            $pageViewModel->currentLanguageId = str_replace('_', '-', $this->languagesService->getCurrentLanguage()->id);
-            $pageViewModel->breadcrumbs = $this->breadcrumbViewModelService->getBreadcrumbByPageId($pageConfiguration['id']);
+            $pageViewModel->id = $pageEntity->id;
+            $pageViewModel->htmlTitle = $pageEntity->htmlTitle;
+            $pageViewModel->htmlMetaDescription = $pageEntity->htmlMetaDescription;
+            $pageViewModel->htmlMetaKeywords = $pageEntity->htmlMetaKeywords;
+            $pageViewModel->title = $pageEntity->title;
+            $pageViewModel->description = $pageEntity->description;
+            $pageViewModel->viewPath = $pageEntity->viewPath;
+            $pageViewModel->currentLanguageId = $pageEntity->currentLanguageId;
+            $pageViewModel->breadcrumbs = $this->breadcrumbViewModelService->getBreadcrumbByPageId($pageEntity->id);
 
             return $pageViewModel;
 

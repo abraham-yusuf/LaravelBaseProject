@@ -2,7 +2,9 @@
 
 namespace App\Http\ViewComponents\Navbar\Services;
 
+use App\Services\AuthService;
 use App\Custom\Languages\Services\LanguagesService;
+use App\Custom\Pages\Services\PagesService;
 use App\Http\ViewComponents\Navbar\Models\NavbarLinkViewModel;
 use App\Http\ViewComponents\Navbar\Models\NavbarViewModel;
 use Illuminate\Support\Facades\Auth;
@@ -10,10 +12,29 @@ use Illuminate\Support\Facades\Route;
 
 class NavbarViewModelService {
 
+    /**
+     * @var LanguagesService
+     */
     private $languagesService;
 
-    public function __construct(LanguagesService $languagesService) {
+    /**
+     * @var PagesService
+     */
+    private $pagesService;
+
+    /**
+     * @var AuthService
+     */
+    private $authService;
+
+    function __construct(
+        PagesService $pagesService,
+        LanguagesService $languagesService,
+        AuthService $authService) {
+
+        $this->pagesService = $pagesService;
         $this->languagesService = $languagesService;
+        $this->authService = $authService;
     }
 
     public function getModel() {
@@ -75,7 +96,7 @@ class NavbarViewModelService {
      */
     private function createHomeLinkModel() {
         $url = route('index');
-        $text = $this->getMenuPageTextFromConfig('custom.pages.index');
+        $text = $this->getMenuPageTextFromConfig(config('custom.pages.INDEX'));
         $isActive = Route::currentRouteNamed('index*');
         return new NavbarLinkViewModel($url, $text, $isActive);
     }
@@ -85,36 +106,43 @@ class NavbarViewModelService {
      * @return NavbarViewModel
      */
     private function createViewModelAdminPart($vieModel) {
-        $vieModel->isUserAuth = Auth::check();
+        $vieModel->isUserAuth = $this->authService->isAnyUserAuthenticated();
         if($vieModel->isUserAuth) {
-            $vieModel->userName = '@' . Auth::user()->name;
+            $userEntity = $this->authService->getAuthUser();
+            $vieModel->userName =  $userEntity->name;
         }
+        $vieModel->adminPageLinks = [
+            $this->createAuthHomeLink()
+        ];
         return $vieModel;
 
     }
 
     private function createLoginLinkModel() {
         $url = route('login');
-        $text = $this->getMenuPageTextFromConfig('custom.pages.auth.login');
+        $text = $this->getMenuPageTextFromConfig(config('custom.pages.AUTH_LOGIN'));
         $isActive = Route::currentRouteNamed('login*');
         return new NavbarLinkViewModel($url, $text, $isActive);
     }
 
     private function createRegisterLink() {
         $url = route('register');
-        $text = $this->getMenuPageTextFromConfig('custom.pages.auth.register');
+        $text = $this->getMenuPageTextFromConfig(config('custom.pages.AUTH_REGISTER'));
         $isActive = Route::currentRouteNamed('register*');
         return new NavbarLinkViewModel($url, $text, $isActive);
     }
 
-    private function getMenuPageTextFromConfig($pageConfigPath) {
-        $pageConfig = config($pageConfigPath);
-        $shortNameKey = $pageConfig['shortNameKey'];
-        $outcome = __($shortNameKey);
-        if($outcome == $shortNameKey) {
-            $shortNameKey = $pageConfig['titleKey'];
-            $outcome = __($shortNameKey);
-        }
+    private function createAuthHomeLink() {
+        $userEntity = $this->authService->getAuthUser();
+        $url = route('auth');
+        $text = $userEntity ? '@' . $userEntity->name : "";
+        $isActive = Route::currentRouteNamed('auth');
+        return new NavbarLinkViewModel($url, $text, $isActive);
+    }
+
+    private function getMenuPageTextFromConfig(int $pageId) {
+        $pageEntity = $this->pagesService->getPageById($pageId);
+        $outcome = $pageEntity->shortName;
         return $outcome;
     }
 

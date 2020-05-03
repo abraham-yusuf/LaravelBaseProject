@@ -12,6 +12,11 @@ class UserEntity extends CustomEntity {
     public $id;
 
     /**
+     * @var int
+     */
+    public $name;
+
+    /**
      * @var string
      */
     public $email;

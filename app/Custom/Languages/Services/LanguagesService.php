@@ -1,10 +1,8 @@
 <?php
 
-
 namespace App\Custom\Languages\Services;
 
-
-use App\Custom\Entities\LanguageEntity;
+use App\Custom\Languages\Entities\LanguageEntity;
 
 class LanguagesService {
 
@@ -37,7 +35,7 @@ class LanguagesService {
     }
 
     /**
-     * @return LanguageEntity[];
+     * @return LanguageEntity[]
      */
     public function getAvailableLanguages() {
         $outcome = [];

@@ -3,11 +3,19 @@
 namespace App\ViewModelsServices;
 
 use App\Custom\Logging\AppLog;
+use App\Custom\Pages\Services\PagesService;
 use App\ViewModels\Pages\BreadcrumbViewModel;
 
 class BreadcrumbViewModelService {
 
-    function __construct() {
+    /**
+     * @var PagesService
+     */
+    private $pagesService;
+
+    function __construct(PagesService $pagesService) {
+
+        $this->pagesService = $pagesService;
     }
 
     /**
@@ -36,7 +44,7 @@ class BreadcrumbViewModelService {
         try {
             return [
                 new BreadcrumbViewModel(
-                    $this->getPageTextFromConfig('custom.pages.index'),
+                    $this->getPageTextById(config('custom.pages.INDEX')),
                     route('index') )
             ];
 
@@ -46,14 +54,9 @@ class BreadcrumbViewModelService {
         }
     }
 
-    private function getPageTextFromConfig($pageConfigPath) {
-        $pageConfig = config($pageConfigPath);
-        $shortNameKey = $pageConfig['shortNameKey'];
-        $outcome = __($shortNameKey);
-        if($outcome == $shortNameKey) {
-            $shortNameKey = $pageConfig['titleKey'];
-            $outcome = __($shortNameKey);
-        }
+    private function getPageTextById(int $pageId) {
+        $pageEntity = $this->pagesService->getPageById($pageId);
+        $outcome = $pageEntity->shortName;
         return $outcome;
     }
 

@@ -35,6 +35,11 @@ class NavbarViewModel {
     public $isUserAuth;
 
     /**
+     * @var NavbarLinkViewModel[]
+     */
+    public $adminPageLinks;
+
+    /**
      * @var string
      */
     public $userName;
@@ -43,6 +48,7 @@ class NavbarViewModel {
         $this->pageLinks = [];
         $this->userPageLinks = [];
         $this->languageLinks = [];
+        $this->adminPageLinks = [];
         $this->isUserAuth = false;
         $this->isMultilanguageActive = false;
     }

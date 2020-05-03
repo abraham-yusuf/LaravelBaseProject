@@ -3,7 +3,7 @@
 return [
     'htmlTitle' => 'Private area',
     'htmlMetaDescription' => 'Manage your website',
-    'htmlMetaKeywordsKey' => '',
+    'htmlMetaKeywords' => '',
     'title' => 'Private area',
     'description' => 'Manage your website',
 

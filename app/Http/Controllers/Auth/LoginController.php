@@ -49,7 +49,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        $model = $this->pageViewModelService->getViewModelByConfigurationKey('custom.pages.auth.login');
+        $model = $this->pageViewModelService->getViewModelByPageId(config('custom.pages.AUTH_LOGIN'));
         return view($model->viewPath, compact('model'));
     }
 }

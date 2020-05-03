@@ -17,7 +17,7 @@ class PagesController extends Controller {
     }
 
     public function index() {
-        $model = $this->pageViewModelService->getViewModelByConfigurationKey('custom.pages.index');
+        $model = $this->pageViewModelService->getViewModelByPageId(config('custom.pages.INDEX'));
         return view($model->viewPath, compact('model'));
     }
 }

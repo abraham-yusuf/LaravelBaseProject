@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Custom\Entities;
+namespace App\Custom\Languages\Entities;
 
 class LanguageEntity {
 
