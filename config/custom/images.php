@@ -19,5 +19,6 @@ return [
 
     'static' => [
         'defaultLazyPlaceholder' => $imagesBaseUrl . '/lazy-img-placeholder.png',
+        'logoBlack' => $imagesBaseUrl . '/logo_black.svg',
     ]
 ];

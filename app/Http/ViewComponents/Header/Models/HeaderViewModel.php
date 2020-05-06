@@ -1,16 +1,21 @@
 <?php
 
-namespace App\Http\ViewComponents\Navbar\Models;
+namespace App\Http\ViewComponents\Header\Models;
 
-class NavbarViewModel {
+class HeaderViewModel {
 
     /**
-     * @var NavbarLinkViewModel[]
+     * @var HeaderLogoViewModel
+     */
+    public $logo;
+
+    /**
+     * @var HeaderLinkViewModel[]
      */
     public $pageLinks;
 
     /**
-     * @var NavbarLinkViewModel[]
+     * @var HeaderLinkViewModel[]
      */
     public $userPageLinks;
 
@@ -20,7 +25,7 @@ class NavbarViewModel {
     public $isMultilanguageActive;
 
     /**
-     * @var NavbarLinkViewModel[]
+     * @var HeaderLinkViewModel[]
      */
     public $languageLinks;
 
@@ -35,7 +40,7 @@ class NavbarViewModel {
     public $isUserAuth;
 
     /**
-     * @var NavbarLinkViewModel[]
+     * @var HeaderLinkViewModel[]
      */
     public $adminPageLinks;
 

@@ -1,15 +1,18 @@
 :root {
-    --defaultFont:"Raleway",sans-serif;
+    /*---Fonts---*/
+    --defaultFont:'DINRegular', Helvetica, Arial, sans-serif;
+    --boldFont:'DINBold', Helvetica, Arial, sans-serif;
     --defaultFontSize: 14px;
 
-    --backgroundColor: #fff;
+    /*---Margins---*/
+    --pageMargins: 10px;
+    --pageMarginsNoMobile: var(--pageMargins);
 
-    --textColor: #636b6f;
-
-    --corporateColor: #89ba40;
-
+    /*---Colors---*/
+    --backgroundColor: #ffffff;
+    --textColor: #444444;
+    --corporateColor: #444444;
     --complementaryColor: #ffffff;
-
     --formFieldErrorColor: #ff5353;
 
     /*---Buttons---*/
@@ -17,6 +20,15 @@
     --buttonTextColorHover: var(--complementaryColor);
     --buttonBorderColor: var(--textColor);
 
+    /*---Navbar---*/
+    --navbarHeight: 60px;
+    --navbarLogoHeight: 40px;
+    --navbarLinksSpace: 30px;
+    --navbarLinksSpaceNoMobile: 20px;
+    --navbarBurgerSize: 30px;
+    --navbarLinkFontSize: 12px;
+
+    /*---Devices---*/
     --mobileScreenMaxWidth: 767px;
     --tabletScreenMaxWidth: 991px;
     --smallDesktopScreenMaxWidth: 1199px;

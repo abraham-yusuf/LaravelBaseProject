@@ -6,7 +6,8 @@
 @import "layout/buttons";
 @import "layout/animations";
 @import "layout/wrapper";
-@import "viewComponents/navbar/navbar";
+
+@import "viewComponents/header/header";
 
 /*Form*/
 @import "custom/form/form";
@@ -16,7 +17,7 @@
 //@import "custom/cro-image-carousel/cro-image-carousel";
 
 
-@import "pages";
+@import "page";
 /*---Pages----*/
 @import "pages/index";
 
