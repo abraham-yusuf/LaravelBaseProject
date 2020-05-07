@@ -1,6 +1,6 @@
 @extends('layouts.page')
 
-@section('page_content')
+@section('page_main')
     <div>
         <img src="{{config('custom.images.static.defaultLazyPlaceholder')}}" data-src="https://via.placeholder.com/400x300.png" class="jlimg">
     </div>
