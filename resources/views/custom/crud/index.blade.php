@@ -1,4 +1,4 @@
-<div class="section__content admin-section__container">
+<div class="crud__container">
     <div class="general__buttons">
         @if($model->createLink != null)
             <div>

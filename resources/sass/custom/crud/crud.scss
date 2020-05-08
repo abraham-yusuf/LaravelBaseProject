@@ -1,4 +1,4 @@
-.admin-section__container {
+.crud__container {
 
     .general__buttons {
         display: inline-flex;
@@ -17,10 +17,9 @@
             text-align: left;
             padding: 10px 10px;
         }
-        td {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+
+        .table__td-centered {
+            text-align: center;
         }
         th {
             background: darkgray;
@@ -30,20 +29,14 @@
             background: lightgrey;
         }
 
-        .row-edit {
-            width: 25%;
+        .row-manage {
+            text-align: center;
+            width: 15%;
         }
 
-        .row-delete {
-            width: 20%;
-        }
         @media (--no-mobileDevice) {
-            .row-edit {
-                width: 10%;
-            }
-
-            .row-delete {
-                width: 10%;
+            .row-manage {
+                width: 5%;
             }
         }
 
