@@ -5,6 +5,7 @@ return [
     'drag-drop-images' => 'O trascina le immagini qui dentro...',
     'thumbs-description' => 'Trascina le immagini per ordinarle o clicca sul cestino per eliminarle',
     'sort-image-button' => 'Ordina',
+    'small-image-button' => 'Small view',
     'delete-image-button' => 'Elimina',
     'delete-confirm-image-button' => 'Conferma',
     'upload-ok'=> 'Immagine caricata correttamente',
