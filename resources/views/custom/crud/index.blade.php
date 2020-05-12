@@ -1,5 +1,5 @@
 <div class="crud__container">
-    <div class="general__buttons">
+    <div class="page__section general__buttons">
         @if($model->createLink != null)
             <div>
                 <a class="cro__button cro__button--small" href="{{ $model->createLink->url }}">
@@ -7,20 +7,20 @@
                 </a>
             </div>
         @endif
-            @if($model->createLink != null)
-                <div>
-                    <a class="cro__button cro__button--small" href="{{ $model->sortLink->url }}">
-                        {{ $model->sortLink->text }}
-                    </a>
-                </div>
-            @endif
+        @if($model->createLink != null)
+            <div>
+                <a class="cro__button cro__button--small" href="{{ $model->sortLink->url }}">
+                    {{ $model->sortLink->text }}
+                </a>
+            </div>
+        @endif
     </div>
     @if($model->crudTable->items != null && !empty($model->crudTable->items))
-
-        <table class="items__table">
-            <thead>
+        <div class="page__section">
+            <table class="items__table">
+                <thead>
                 <tr>
-                    <th>
+                    <th class="row-main">
                         {{$model->crudTable->nameTitle}}
                     </th>
                     @if($model->crudTable->isEditingEnabled)
@@ -39,11 +39,11 @@
                         </th>
                     @endif
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @foreach($model->crudTable->items as $crudItem)
                     <tr>
-                        <td class="text-ellipsis">{{$crudItem->name}}</td>
+                        <td>{{$crudItem->name}}</td>
                         @if($model->crudTable->isEditingEnabled)
                             <td class="table__td-centered">
                                 <a href="{{ $crudItem->editUrl }}">
@@ -65,7 +65,8 @@
                         @endif
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
-    @endif
+                </tbody>
+            </table>
+            @endif
+        </div>
 </div>
