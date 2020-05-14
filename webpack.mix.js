@@ -1,6 +1,6 @@
 const mix = require('laravel-mix');
 const webpack = require("webpack");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 require('laravel-mix-polyfill');
 
 let publicFolderName = 'public';
@@ -22,7 +22,7 @@ var postCssPlugins = [
     require('autoprefixer'),
     require('postcss-media-variables'),
     require('postcss-custom-media'),
-    require('postcss-custom-properties')({ preserve: false }),
+    require('postcss-custom-properties')({preserve: false}),
     require('postcss-calc'),
     require('postcss-media-variables'),
     require('postcss-media-minmax'),
@@ -56,16 +56,11 @@ mix.js('resources/js/app.js', publicFolderName + '/js')
     .extract()
     .sass('resources/sass/app.scss', publicFolderName + '/css').options({
     postCss: postCssPlugins
-})
-    .sourceMaps()
-    .webpackConfig({
-        devtool: 'source-map'
-    })
-    .polyfill({
-        enabled: true,
-        useBuiltIns: "usage",
-        targets: "> 10%, not dead"
-    });
+}).polyfill({
+    enabled: true,
+    useBuiltIns: "usage",
+    targets: "> 10%, not dead"
+});
 if (mix.inProduction()) {
     mix.version();
 }
