@@ -9,7 +9,7 @@ return [
     'sort-image-button' => 'Ordina',
     'small-image-button' => 'Small view',
     'delete-image-button' => 'Elimina',
-    'delete-confirm-image-button' => 'Conferma',
+    'delete-confirm-image-button' => 'OK?',
     'upload-ok'=> 'Immagine caricata correttamente',
     'upload-ko' => 'Errore di caricamento!!',
     'max-uploaded-file-reached' => 'Hai raggiunto il limite di immagini caricate, prima di caricarne un\'altra devi cancellarne una',
