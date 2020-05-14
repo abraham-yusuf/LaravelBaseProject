@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'htmlTitle' => 'Laravel Base Project - cronycles',
+    'htmlTitle' => config('custom.company.name'),
     'htmlMetaDescription' => 'Boilerplate Laravel base project per iniziare a sviluppare',
     'htmlMetaKeywords' => 'laravel, laravel base project, cronycles laravel',
 ];

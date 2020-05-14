@@ -20,5 +20,6 @@ return [
     'static' => [
         'defaultLazyPlaceholder' => $imagesBaseUrl . '/lazy-img-placeholder.png',
         'logoBlack' => $imagesBaseUrl . '/logo_black.svg',
+        'socialsDefaultLogo' => $imagesBaseUrl . '/og_social_default_logo.jpg',
     ]
 ];
