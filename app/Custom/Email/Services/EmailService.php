@@ -12,6 +12,10 @@ class EmailService {
 
     public function sendEmail($senderName, $senderEmail, $message) {
         try {
+            $emailParams = "senderName: " . $senderName . "; senderEmail: " . $senderEmail . "; message: " . $message;
+            AppLog::info("Send email function called with params below");
+            AppLog::info($emailParams);
+
             $data = [
                 'to' => config('custom.mail.contact_email'),
                 'subject' => config('custom.mail.contact_subject'),
@@ -30,6 +34,7 @@ class EmailService {
             $failures = Mail::failures();
 
             if(count($failures) > 0){
+                AppLog::errorMessage("We have mail failures");
 
                 foreach ($failures as $failure) {
                     AppLog::errorMessage("$failure");
