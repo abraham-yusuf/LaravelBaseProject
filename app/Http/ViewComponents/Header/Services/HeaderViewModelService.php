@@ -86,22 +86,18 @@ class HeaderViewModelService {
      * @return mixed
      */
     private function createViewModelLanguagesPart($outcome) {
-        $outcome->isMultilanguageActive = $this->languageService->isMultilanguageActive();
-        if($outcome->isMultilanguageActive) {
-            $visibleLanguages = $this->languageService->getVisibleLanguages();
+        $visibleLanguages = $this->languageService->getVisibleLanguages();
+        if (count($visibleLanguages) > 1) {
             foreach ($visibleLanguages as $visibleLanguage) {
-                if($visibleLanguage->isCurrent) {
-                    $outcome->currentLanguage = $visibleLanguage->name;
-                }
-                else {
+                if ($visibleLanguage->isCurrent) {
+                    $outcome->currentLanguage = $visibleLanguage->code;
+                } else {
                     $url = route('lang.switch', $visibleLanguage->code);
-                    $linkViewModel = new HeaderLinkViewModel($url,$visibleLanguage->name, false );
+                    $linkViewModel = new HeaderLinkViewModel($url, $visibleLanguage->code, false);
                     array_push($outcome->languageLinks, $linkViewModel);
                 }
             }
         }
-
-        return $outcome;
     }
 
     /**

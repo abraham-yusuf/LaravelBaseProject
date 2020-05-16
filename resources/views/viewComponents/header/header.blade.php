@@ -11,7 +11,7 @@
                 @endforeach
             </ul>
             <ul>
-                @if ($model->isMultilanguageActive)
+                @if (!empty($model->languageLinks))
                     <li>
                         <div class="nav__dropdown-container">
                             <div class="jdropdownButton dropdown__button">
