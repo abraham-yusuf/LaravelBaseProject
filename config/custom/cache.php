@@ -2,6 +2,7 @@
 
 return [
     'api' => [
-        'users' => ['key' => 'users', 'seconds' => 60]
+        'users' => ['key' => 'users', 'seconds' => 60],
+        'languages' => ['key' => 'languages', 'seconds' => 60]
     ]
 ];

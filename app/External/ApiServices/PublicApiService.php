@@ -3,7 +3,9 @@
 namespace App\External\ApiServices;
 
 use App\Custom\Logging\AppLog;
+use App\External\ApiServiceEntities\Language;
 use App\External\ApiServiceEntities\User;
+use App\External\Repositories\LocalesRepository;
 use App\External\Repositories\UsersRepository;
 
 class PublicApiService {
@@ -13,10 +15,17 @@ class PublicApiService {
      */
     private $usersRepository;
 
+    /**
+     * @var LocalesRepository
+     */
+    private $localesRepository;
+
     public function __construct(
-        UsersRepository $usersRepository) {
+        UsersRepository $usersRepository,
+        LocalesRepository $localesRepository) {
 
         $this->usersRepository = $usersRepository;
+        $this->localesRepository = $localesRepository;
     }
 
     /**
@@ -41,6 +50,34 @@ class PublicApiService {
     }
 
     /**
+     * @return Language[]
+     */
+    public function getLanguages() {
+        try {
+            $outcome = [];
+
+            /** @var array $dbLocales */
+            $dbLocales = $this->localesRepository->all();
+
+            if ($dbLocales != null && !empty($dbLocales)) {
+                /** @var \App\Locale $dbLocale */
+                foreach ($dbLocales as $dbLocale) {
+                    $entity = $this->createLanguageEntityByDbEntity($dbLocale);
+                    if ($entity != null) {
+                        array_push($outcome, $entity);
+                    }
+                }
+            }
+
+            return $outcome;
+
+        } catch (\Exception $e) {
+            AppLog::error($e);
+            return null;
+        }
+    }
+
+    /**
      * @param \App\User|null $dbUser
      * @return User
      */
@@ -50,6 +87,24 @@ class PublicApiService {
             $outcome->id = $dbUser->id;
             $outcome->name = $dbUser->name;
             $outcome->email = $dbUser->email;
+        }
+        return $outcome;
+    }
+
+    /**
+     * @param \App\Locale|null $dbLocale
+     * @return Language
+     */
+    private function createLanguageEntityByDbEntity($dbLocale) {
+        $outcome = new Language();
+        if ($dbLocale != null) {
+            $outcome->code = $dbLocale->code;
+            $outcome->cultureCode = $dbLocale->culture_code;
+            $outcome->name = $dbLocale->name;
+            $outcome->isDefault = $dbLocale->default;
+            $outcome->isEnabled = $dbLocale->enabled;
+            $outcome->isVisible = $dbLocale->visible;
+            $outcome->isAuthVisible = $dbLocale->auth_visible;
         }
         return $outcome;
     }
