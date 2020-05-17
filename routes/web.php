@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,4 +40,9 @@ Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageControl
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/auth', ['as' => 'auth', 'uses' => 'Auth\AuthPagesController@index']);
+
+    Route::get('auth/cache-flush', function () {
+        Cache::flush();
+        dd("cache flushed");
+    });
 });
