@@ -20,7 +20,7 @@
                     @foreach($model->socialLinks as $socialLink)
                         <li>
                             <a href="{{$socialLink->url}}" target="_blank">
-                                <i class="{{$socialLink->iconClass}}"></i>
+                                <i class="{{$socialLink->iconClass}}" title="{{$socialLink->text}}"></i>
                             </a>
                         </li>
                     @endforeach
