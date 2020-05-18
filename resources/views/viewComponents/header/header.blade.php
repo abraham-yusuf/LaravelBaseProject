@@ -19,7 +19,7 @@
                 <ul>
                     @foreach($model->socialLinks as $socialLink)
                         <li>
-                            <a href="{{$socialLink->url}}">
+                            <a href="{{$socialLink->url}}" target="_blank">
                                 <i class="{{$socialLink->iconClass}}"></i>
                             </a>
                         </li>
