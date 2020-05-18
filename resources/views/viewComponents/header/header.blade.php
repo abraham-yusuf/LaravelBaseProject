@@ -15,8 +15,19 @@
                            class="{{ $pageLink->isActive ? 'active' : "" }}">{{$pageLink->text}}</a></li>
                 @endforeach
             </ul>
-            <ul>
-                @if (!empty($model->languageLinks))
+            @if (!empty($model->socialLinks))
+                <ul>
+                    @foreach($model->socialLinks as $socialLink)
+                        <li>
+                            <a href="{{$socialLink->url}}">
+                                <i class="{{$socialLink->iconClass}}"></i>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+            @if (!empty($model->languageLinks))
+                <ul>
                     <li>
                         <div class="nav__dropdown-container">
                             <div class="jdropdownButton dropdown__button">
@@ -32,8 +43,8 @@
                             </div>
                         </div>
                     </li>
-                @endif
-            </ul>
+                </ul>
+            @endif
             @if ($model->isUserAuth)
                 <ul>
                     <li>
@@ -52,17 +63,6 @@
                             </div>
                         </div>
                     </li>
-                </ul>
-            @endif
-            @if (!empty($model->socialLinks))
-                <ul>
-                    @foreach($model->socialLinks as $socialLink)
-                        <li>
-                            <a href="{{$socialLink->url}}">
-                                <i class="{{$socialLink->iconClass}}"></i>
-                            </a>
-                        </li>
-                    @endforeach
                 </ul>
             @endif
         </nav>
