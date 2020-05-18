@@ -3,6 +3,7 @@
 namespace App\Http\ViewComponents\Header\Services;
 
 use App\Http\ViewComponents\Header\Models\HeaderLogoViewModel;
+use App\Http\ViewComponents\Header\Models\HeaderSocialLinkViewModel;
 use App\Services\AuthService;
 use App\Custom\Languages\Services\LanguageService;
 use App\Custom\Pages\Services\PagesService;
@@ -41,6 +42,7 @@ class HeaderViewModelService {
         $outcome = new HeaderViewModel();
         $outcome->logo = $this->createLogoViewModel();
         $outcome->pageLinks = $this->createPageLinks();
+        $outcome->socialLinks = $this->createSocialLinks();
         $outcome->userPageLinks = $this->createUserPageLinks();
         $outcome = $this->createViewModelLanguagesPart($outcome);
         $outcome = $this->createViewModelAdminPart($outcome);
@@ -66,6 +68,19 @@ class HeaderViewModelService {
     private function createPageLinks() {
         $outcome = [
             $this->createHomeLinkModel(),
+        ];
+        return $outcome;
+    }
+
+    /**
+     * @return HeaderLinkViewModel[]
+     */
+    private function createSocialLinks() {
+        $outcome = [
+            new HeaderSocialLinkViewModel(
+                config('custom.company.socials.instagram.linkUrl'),
+                config('custom.company.socials.instagram.linkText'),
+                config('custom.company.socials.instagram.iconClass'))
         ];
         return $outcome;
     }

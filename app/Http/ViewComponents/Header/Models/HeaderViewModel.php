@@ -17,6 +17,11 @@ class HeaderViewModel {
     /**
      * @var HeaderLinkViewModel[]
      */
+    public $socialLinks;
+
+    /**
+     * @var HeaderLinkViewModel[]
+     */
     public $userPageLinks;
 
     /**
@@ -46,6 +51,7 @@ class HeaderViewModel {
 
     public function __construct() {
         $this->pageLinks = [];
+        $this->socialLinks = [];
         $this->userPageLinks = [];
         $this->languageLinks = [];
         $this->adminPageLinks = [];
