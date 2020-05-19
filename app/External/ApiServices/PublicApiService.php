@@ -39,7 +39,7 @@ class PublicApiService {
             if ($userId != null && $userId > 0) {
                 /** @var \App\User $dbUser */
                 $dbUser = $this->usersRepository->find($userId);
-                $outcome = $this->createUserEntityByDbEntity($dbUser);
+                $outcome = $this->createUserEntityByDbModel($dbUser);
             }
             return $outcome;
 
@@ -62,7 +62,7 @@ class PublicApiService {
             if ($dbLocales != null && !empty($dbLocales)) {
                 /** @var \App\Locale $dbLocale */
                 foreach ($dbLocales as $dbLocale) {
-                    $entity = $this->createLanguageEntityByDbEntity($dbLocale);
+                    $entity = $this->createLanguageEntityByDbModel($dbLocale);
                     if ($entity != null) {
                         array_push($outcome, $entity);
                     }
@@ -81,7 +81,7 @@ class PublicApiService {
      * @param \App\User|null $dbUser
      * @return User
      */
-    private function createUserEntityByDbEntity($dbUser) {
+    private function createUserEntityByDbModel($dbUser) {
         $outcome = new User();
         if ($dbUser != null) {
             $outcome->id = $dbUser->id;
@@ -95,7 +95,7 @@ class PublicApiService {
      * @param \App\Locale|null $dbLocale
      * @return Language
      */
-    private function createLanguageEntityByDbEntity($dbLocale) {
+    private function createLanguageEntityByDbModel($dbLocale) {
         $outcome = new Language();
         if ($dbLocale != null) {
             $outcome->code = $dbLocale->code;
