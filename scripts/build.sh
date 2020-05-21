@@ -73,7 +73,11 @@ appVersion=($(jq -r '.version' composer.json))
 
 if [ ${releaseType} != "onlybuild" ]
 then
+    scripts/createZipPackage.sh ${appVersion}
+
     scripts/commitVersionAndTag.sh ${appVersion}
+
+    printf "\n${GREEN} Finished release version ${appVersion}${NC}\n"
 fi
 
 printf "${NC}\n"

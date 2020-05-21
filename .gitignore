@@ -4,7 +4,6 @@
 package-lock.json
 public/css/
 public/js/
-public/images/
 public/fonts/
 public/mix-manifest.json
 public/js/*.txt
