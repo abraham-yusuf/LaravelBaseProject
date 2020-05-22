@@ -20,9 +20,9 @@ $croVG_gridGap: 2ch;
 ```html
  <div class="cro__vertical__gallery">
     <div class="gallery__box">
-        <div class="image__track">
+        <figure class="image__track">
             <img src="https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=">
-        </div>
+        </figure>
     </div>
     ...
  </div>
