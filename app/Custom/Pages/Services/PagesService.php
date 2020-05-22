@@ -13,6 +13,7 @@ use App\ViewModelPageBuilders\Auth\LoginViewModelPageBuilder;
 use App\ViewModelPageBuilders\Auth\RegisterViewModelPageBuilder;
 use App\ViewModelPageBuilders\Auth\ResetPasswordViewModelPageBuilder;
 use App\ViewModelPageBuilders\IndexViewModelPageBuilder;
+use App\ViewModelPageBuilders\UnknownViewModelPageBuilder;
 
 class PagesService {
 
@@ -25,6 +26,7 @@ class PagesService {
 
     public function __construct(
         LanguageService $languageService,
+        UnknownViewModelPageBuilder $unknownViewModelPageBuilder,
         IndexViewModelPageBuilder $indexViewModelPageBuilder,
         LoginViewModelPageBuilder $loginViewModelPageBuilder,
         RegisterViewModelPageBuilder $registerViewModelPageBuilder,
@@ -34,6 +36,11 @@ class PagesService {
         ) {
 
         $this->languageService = $languageService;
+
+        $this->pageConfigurations[config('custom.pages.UNKNOWN')] = [
+            'config' => config('pages.unknown'),
+            'viewModelPageBuilder' => $unknownViewModelPageBuilder
+        ];
 
         $this->pageConfigurations[config('custom.pages.INDEX')] = [
             'config' => config('pages.index'),

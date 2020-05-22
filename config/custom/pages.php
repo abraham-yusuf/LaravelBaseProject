@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'UNKNOWN' => 0,
     'INDEX' => 1,
     'AUTH_LOGIN' => 1001,
     'AUTH_REGISTER' => 1002,
