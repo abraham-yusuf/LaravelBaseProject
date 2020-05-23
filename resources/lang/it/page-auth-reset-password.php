@@ -3,7 +3,7 @@
 return [
     'htmlTitle' => 'Reset password',
     'htmlMetaDescription' => 'Scrivi la tua nuova password',
-    'htmlMetaKeywordsKey' => '',
+    'htmlMetaKeywords' => '',
     'title' => 'Reset password',
     'shortName' => 'Reset password',
     'description' => 'Scrivi la tua nuova password',

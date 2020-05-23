@@ -3,7 +3,7 @@
 return [
     'htmlTitle' => 'Registrati',
     'htmlMetaDescription' => 'Registrati sul nostro sito.',
-    'htmlMetaKeywordsKey' => '',
+    'htmlMetaKeywords' => '',
     'title' => 'Registrati',
     'shortName' => 'Registrati',
     'description' => 'Registrati sul nostro sito.',
