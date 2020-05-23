@@ -27,9 +27,9 @@ export default class MyClass {
 - nell'html poi bisogna creare un container con immagini nel seguente formato:
 ```html
 <div class="cro-fs-images-carousel">
-    <figure><img class="tns-lazy-img" data-src="https://via.placeholder.com/1920x1080.png"></figure>
-    <figure><img class="tns-lazy-img" data-src="https://via.placeholder.com/1080x1920.png"></figure>
-    <figure><img class="tns-lazy-img" data-src="https://via.placeholder.com/1920x1080.png"></figure>
+    <figure><img title="image title" class="tns-lazy-img" data-src="https://via.placeholder.com/1920x1080.png"></figure>
+    <figure><img title="image title" class="tns-lazy-img" data-src="https://via.placeholder.com/1080x1920.png"></figure>
+    <figure><img title="image title" class="tns-lazy-img" data-src="https://via.placeholder.com/1920x1080.png"></figure>
 </div>
 ```
 

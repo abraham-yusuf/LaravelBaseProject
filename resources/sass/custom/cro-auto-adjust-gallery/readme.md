@@ -18,10 +18,10 @@ $croAAG_overlayTextColor: #ffffff;
 ```html
  <div class="cro__auto-adjust__gallery square overlay-zoom">
     <article class="gallery__box">
-        <a class="image__track" href="#">
-            <img src="https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=">
+        <a title="image title!!" class="image__track" href="#">
+            <img title="image title!!" src="https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=">
         </a>
-        <a href="#" class="overlay__track">
+        <a title="link title!!" href="#" class="overlay__track">
             <div class="overlay__text">The overlay text!</div>
         </a>
         <div class="caption__track">
