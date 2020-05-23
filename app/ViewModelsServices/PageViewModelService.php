@@ -7,6 +7,7 @@ use App\Custom\Languages\Services\LanguageService;
 use App\Custom\Logging\AppLog;
 use App\Custom\Pages\Entities\PageEntity;
 use App\Custom\Pages\Services\PagesService;
+use App\Custom\Routes\ViewModelServices\RoutesViewModelService;
 use App\ViewModels\Language\LanguageViewModel;
 use App\ViewModels\Pages\PageViewModel;
 
@@ -27,15 +28,22 @@ class PageViewModelService {
      */
     private $languageService;
 
+    /**
+     * @var RoutesViewModelService
+     */
+    private $routesViewModelService;
+
 
     function __construct(
         LanguageService $languageService,
         PagesService $pagesService,
+        RoutesViewModelService $routesViewModelService,
         BreadcrumbViewModelService $breadcrumbViewModelService) {
 
         $this->languageService = $languageService;
         $this->pagesService = $pagesService;
         $this->breadcrumbViewModelService = $breadcrumbViewModelService;
+        $this->routesViewModelService = $routesViewModelService;
     }
 
     /**
@@ -73,6 +81,9 @@ class PageViewModelService {
             $pageViewModel->viewPath = $pageEntity->viewPath;
             $pageViewModel->currentLanguage = $this->createLanguageViewModelByEntity($pageEntity->currentLanguage);
             $pageViewModel->breadcrumbs = $this->breadcrumbViewModelService->getBreadcrumbByPageId($pageEntity->id);
+            $pageViewModel->canonicalRouteUrl = $this->routesViewModelService->getCanonicalRouteUrl();
+            $pageViewModel->hreflangRouteUrls = $this->routesViewModelService->getHreflangUrls();
+
 
             return $pageViewModel;
 

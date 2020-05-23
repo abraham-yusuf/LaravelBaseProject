@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', ['as' => 'index', 'uses' => 'PagesController@index']);
+Route::get(__('routes.index'), ['as' => 'index', 'uses' => 'PagesController@index']);
 
 //Login Routes...
 Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
