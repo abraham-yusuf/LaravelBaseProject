@@ -58,7 +58,7 @@ class HeaderViewModelService {
         $outcome->imageUrl = config('custom.images.static.logoBlack');
         $outcome->url = route('index');
         $outcome->linkText = config('custom.company.name');
-        $outcome->altText = config('custom.company.name');
+        $outcome->htmlTitle = $this->getMenuPageHtmlTitleFromConfig(config('custom.pages.INDEX'));
         return $outcome;
     }
 
@@ -122,7 +122,9 @@ class HeaderViewModelService {
         $url = route('index');
         $text = $this->getMenuPageTextFromConfig(config('custom.pages.INDEX'));
         $isActive = Route::currentRouteNamed('index*');
-        return new HeaderLinkViewModel($url, $text, $isActive);
+        $outcome = new HeaderLinkViewModel($url, $text, $isActive);
+        $outcome->htmlTitle = $this->getMenuPageHtmlTitleFromConfig(config('custom.pages.INDEX'));
+        return $outcome;
     }
 
     /**
@@ -167,6 +169,12 @@ class HeaderViewModelService {
     private function getMenuPageTextFromConfig(int $pageId) {
         $pageEntity = $this->pagesService->getPageById($pageId);
         $outcome = $pageEntity->shortName;
+        return $outcome;
+    }
+
+    private function getMenuPageHtmlTitleFromConfig(int $pageId) {
+        $pageEntity = $this->pagesService->getPageById($pageId);
+        $outcome = $pageEntity->htmlTitle;
         return $outcome;
     }
 
