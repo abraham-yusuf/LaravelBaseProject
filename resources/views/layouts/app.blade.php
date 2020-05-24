@@ -12,6 +12,7 @@
 
     @yield('content')
 </main>
+@render(\App\Http\ViewComponents\CookieConsent\Component\CookieConsentComponent::class)
 @include('custom.layouts._scripts')
 @include('custom.layouts._analytics')
 </body>
