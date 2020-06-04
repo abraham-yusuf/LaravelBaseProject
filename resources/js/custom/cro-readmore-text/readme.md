@@ -8,6 +8,7 @@ Taglia il testo se passa una certa altezza e mette un bottone per mostrarlo e na
 ```css
 @import "custom/cro-readmore-text/cro-readmore-text";
 ```
+- Bisogna avere screen.helper.js perché funziona con il plugin. Sta dentro il custom js, é una libreria mia
 - Importare il js dove vi serve:
 ```js
 import CroReadMoreText from "../custom/cro-readmore-text/cro.readmore.text";
