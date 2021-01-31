@@ -1,6 +1,11 @@
 #Laravel Base Project
 * Repository: git@github.com:cronycles/LaravelBaseProject.git
 
+## Requisiti minimi
+- **php v7.3.0** o superiore 
+- npm
+- php composer
+
 ## Scaricare per la prima volta il progetto in locale
 * scaricare il progetto git
 ```
@@ -12,9 +17,7 @@ $ cd LaravelBaseProject
 ```
 * Eseguire i seguenti comandi per installare i pacchetti necessari
 ```
-$ npm install
-$ composer install
-$ composer update --no-scripts
+$ npm run restore
 ```
 * Adesso PHP Artisan:
 ```
